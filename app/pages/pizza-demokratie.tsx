@@ -589,7 +589,8 @@ const PizzaDemokratieCalculator = () => {
 
                         <div>
                             <Label>Schritt {getStepNumber()}: Wähle die Art des Volksbegehrens aus:</Label>
-                            <RadioGroup onValueChange={setInitiativeType} value={initiativeType}>
+
+                            <RadioGroup onValueChange={(value) => setInitiativeType(value as 'initiative' | 'referendum')} value={initiativeType}>
                                 <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="initiative" id="initiative" />
                                     <Label htmlFor="initiative">Initiative</Label>
