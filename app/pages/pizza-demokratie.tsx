@@ -576,6 +576,7 @@ const PizzaDemokratieCalculator = () => {
             },
             body: JSON.stringify({ email, message, newsletter: false }),
           });
+          console.log(response.status)
       
           if (response.ok) {
             alert('Wir werden Sie benachrichtigen, sobald der Service verfügbar ist!');
