@@ -21,6 +21,7 @@
     "@vercel/node": "^3.2.12",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cors": "^2.8.5",
     "lucide-react": "^0.438.0",
     "next": "14.2.8",
     "nodemailer": "^6.9.15",
@@ -31,6 +32,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.15",
     "@types/react": "^18",

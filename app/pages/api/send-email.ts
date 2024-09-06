@@ -1,9 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
+import Cors from 'cors';
+import initMiddleware from '../../../lib/init-middleware';
+
+const cors = initMiddleware(
+  Cors({
+    methods: ['POST'],
+  })
+);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('Request body:', req.body);
   console.log('Request method', req.method);
+  await cors(req, res);
   if (req.method === 'POST') {
     const { email, message, newsletter } = req.body
     console.log('Sending email:', email, message, newsletter);
