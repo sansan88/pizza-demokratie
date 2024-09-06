@@ -430,7 +430,7 @@ const PizzaDemokratieCalculator = () => {
             const cantonIsActive = cantonData[canton].active;
 
             const cityIsActive = level === 'kommunal' ? cantonData[canton].cities.find(c => c.name === city)?.active : true;
-            setIsServiceAvailable(cantonIsActive && cityIsActive);
+            setIsServiceAvailable(!!(cantonIsActive && cityIsActive));
         }
     }, [level, canton, city]);
 
