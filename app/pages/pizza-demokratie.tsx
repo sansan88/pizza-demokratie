@@ -671,9 +671,6 @@ const PizzaDemokratieCalculator = () => {
                             style={{
                                 backgroundColor: colorScheme.primary,
                                 color: 'white',
-                                ':hover': {
-                                    backgroundColor: colorScheme.secondary
-                                }
                             }}
                             disabled={!isServiceAvailable || !level || (level !== 'national' && !canton) || (level === 'kommunal' && !city) || !product}
                         >
