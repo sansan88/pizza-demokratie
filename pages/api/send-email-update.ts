@@ -34,20 +34,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         from: '"Pizza Demokratie" <noreply@sfdd.ch>',
         to: email,
         bcc: ["info@sfdd", "daniel.graf@publicbeta.ch"],
-        subject: "Ihre Offerte von Pizza Demokratie",
+        subject: "Pizza Demokratie - Wir informieren Sie sobald der Service verfügbar ist",
         text: message,
       });
 
       if (newsletter) {
         // Hier könnten Sie die E-Mail-Adresse zu Ihrem Newsletter hinzufügen
         console.log('Subscribing to newsletter:', email);
-        await transporter.sendMail({
-          from: '"Pizza Demokratie Newsletter" <noreply@sfdd.ch>',
-          to: email,
-          bcc: ["info@sfdd", "daniel.graf@publicbeta.ch"],
-          subject: "Newsletter von Pizza Demokratie",
-          text: "Wir tragen Sie in unseren Newsletter ein",
-        });
       }
 
       res.status(200).json({ message: 'Email sent successfully' });

@@ -579,7 +579,7 @@ const PizzaDemokratieCalculator = () => {
         const message = `Bitte benachrichtigen Sie mich, wenn der Service verfügbar ist in: ${location}`;
 
         try {
-            const response = await fetch('/api/send-email', {
+            const response = await fetch('/api/send-email-update', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
