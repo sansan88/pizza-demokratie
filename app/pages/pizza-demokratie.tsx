@@ -457,13 +457,14 @@ const PizzaDemokratieCalculator = () => {
                 eligibleVoters = Object.values(cantonData).reduce((sum, canton) => sum + canton.eligibleVoters, 0);
                 population = Object.values(cantonData).reduce((sum, canton) => sum + canton.population, 0);
             } else if (level === 'kantonal' && canton) {
-                baseSignatures = cantonData[canton][initiativeType];
+                // baseSignatures = cantonData[canton][initiativeType];
+                baseSignatures = cantonData[canton][initiativeType as 'initiative' | 'referendum'];
                 eligibleVoters = cantonData[canton].eligibleVoters;
                 population = cantonData[canton].population;
             } else if (level === 'kommunal' && canton && city) {
                 const selectedCity = cantonData[canton].cities.find(c => c.name === city);
                 if (selectedCity) {
-                    baseSignatures = selectedCity[initiativeType];
+                    baseSignatures = selectedCity[initiativeType as 'initiative' | 'referendum'];
                     eligibleVoters = selectedCity.eligibleVoters;
                     population = selectedCity.population;
                 } else {
