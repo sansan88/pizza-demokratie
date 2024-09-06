@@ -399,18 +399,35 @@ const PizzaDemokratieCalculator = () => {
 
     const [currentCoatOfArms, setCurrentCoatOfArms] = useState(coatOfArms.default);
 
-    const getStepNumber = () => {
-        if (level === 'national') return 2;
-        if (level === 'kantonal') return 3;
-        if (level === 'kommunal') return 4;
-        return 5; // Fallback, falls kein Level ausgewählt wurde
-    };
+    const getStepNumber = (currentStep: string) => {
+        if (!level) {
+            switch (currentStep) {
+                case 'level':
+                    return 1;
+                case 'initiativeType':
+                    return 2;
+                case 'product':
+                    return 3;
+                default:
+                    return 1;
+            }
+        }
 
+        if (level === 'national') return currentStep === 'level' ? 1 : currentStep === 'initiativeType' ? 2 : 3;
+        if (level === 'kantonal') return currentStep === 'level' ? 1 : currentStep === 'canton' ? 2 : currentStep === 'initiativeType' ? 3 : 4;
+        if (level === 'kommunal') return currentStep === 'level' ? 1 : currentStep === 'canton' ? 2 : currentStep === 'city' ? 3 : currentStep === 'initiativeType' ? 4 : 5;
+        return 1; // Fallback
+    };
 
     useEffect(() => {
         // Set the default product to 'authenticated' (second option)
         setProduct('authenticated');
     }, []);
+    useEffect(() => {
+        if (level !== 'kommunal') {
+            setCity('');
+        }
+    }, [level]);
 
     useEffect(() => {
         if (level === 'national') {
@@ -529,8 +546,19 @@ const PizzaDemokratieCalculator = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-4">
                         <div>
-                            <Label>Schritt 1: Wo möchtest du dein Volksbegehren lancieren?</Label>
-                            <Select onValueChange={(value) => { setLevel(value); setCanton(''); setCity(''); }}>
+                            <Label>Schritt {getStepNumber('level')}: Wo möchtest du dein Volksbegehren lancieren?</Label>
+                            <Select
+                                onValueChange={(value) => {
+                                    setLevel(value);
+                                    if (value === 'national') {
+                                        setCanton('');
+                                        setCity('');
+                                    } else if (value === 'kantonal') {
+                                        setCity('');
+                                    }
+                                    // Wenn auf 'kommunal' gewechselt wird, behalten wir den Kanton bei und setzen nur die Stadt zurück
+                                }}
+                            >
                                 <SelectTrigger>
                                     <SelectValue placeholder="Wähle die Ebene" />
                                 </SelectTrigger>
@@ -544,7 +572,7 @@ const PizzaDemokratieCalculator = () => {
 
                         {(level === 'kantonal' || level === 'kommunal') && (
                             <div>
-                                <Label>Schritt 2: In welchem Kanton?</Label>
+                                <Label>Schritt {getStepNumber('canton')}: In welchem Kanton?</Label>
                                 <Select onValueChange={(value) => { setCanton(value as CantonKeys); setCity(''); }}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Wähle deinen Kanton" />
@@ -560,7 +588,7 @@ const PizzaDemokratieCalculator = () => {
 
                         {level === 'kommunal' && canton && (
                             <div>
-                                <Label>Schritt 3: In welcher Stadt?</Label>
+                                <Label>Schritt {getStepNumber('city')}: In welcher Stadt?</Label>
                                 <Select onValueChange={setCity}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Wähle deine Stadt" />
@@ -586,7 +614,7 @@ const PizzaDemokratieCalculator = () => {
                         )}
 
                         <div>
-                            <Label>Schritt {getStepNumber()}: Wähle die Art des Volksbegehrens aus:</Label>
+                            <Label>Schritt {getStepNumber('initiativeType')}: Wähle die Art des Volksbegehrens aus:</Label>
 
                             <RadioGroup onValueChange={(value) => setInitiativeType(value as 'initiative' | 'referendum')} value={initiativeType}>
                                 <div className="flex items-center space-x-2">
@@ -601,7 +629,7 @@ const PizzaDemokratieCalculator = () => {
                         </div>
 
                         <div>
-                            <Label className="mb-2 block">Schritt {getStepNumber()}: Wähle dein Produkt:</Label>
+                            <Label className="mb-2 block">Schritt {getStepNumber('product')}: Wähle dein Produkt:</Label>
                             <div className="grid grid-cols-3 gap-4 mb-6">
                                 {productOptions.map((option, index) => (
                                     <Card
