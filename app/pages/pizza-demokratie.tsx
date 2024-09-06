@@ -10,7 +10,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 
-type CantonKeys = 'ZH' | 'BE' | 'LU' | 'UR' | 'SZ' | 'OW' | 'NW' | 'GL' | 'ZG' | 'FR' | 'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' | 'TI' | 'VD' ;
+type CantonKeys = 'ZH' | 'BE' | 'LU' | 'UR' | 'SZ' | 'OW' | 'NW' | 'GL' | 'ZG' | 'FR' | 'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' | 'TI' | 'VD';
 
 
 
@@ -629,7 +629,11 @@ const PizzaDemokratieCalculator = () => {
                         </div>
 
                         <div className="flex items-center space-x-2">
-                            <Checkbox id="express" checked={expressDelivery} onCheckedChange={setExpressDelivery} />
+                            <Checkbox
+                                id="express"
+                                checked={expressDelivery}
+                                onCheckedChange={(checked) => setExpressDelivery(checked === true)}
+                            />
                             <Label htmlFor="express">Expresslieferung (innerhalb eines Monats)</Label>
                         </div>
 
