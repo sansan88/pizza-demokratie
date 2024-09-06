@@ -9,7 +9,18 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-const cantonData = {
+
+type CantonKeys = 'ZH' | 'BE' | 'LU' | 'UR' | 'SZ' | 'OW' | 'NW' | 'GL' | 'ZG' | 'FR' | 'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' | 'TI' | 'VD' ;
+
+const cantonData: Record<CantonKeys, {
+    name: string;
+    population: number;
+    eligibleVoters: number;
+    initiative: number;
+    referendum: number;
+    active: boolean;
+    cities: { name: string; population: number; eligibleVoters: number; initiative: number; referendum: number; active: boolean }[];
+}> = {
     'ZH': {
         name: 'Zürich',
         population: 1539275,
@@ -299,7 +310,7 @@ const cantonData = {
 };
 
 // Farbschemata definieren
-const colorSchemes = {
+const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { primary: string; secondary: string }> = {
     default: { primary: '#dc0018', secondary: '#A0AEC0' },
     national: { primary: '#D50000', secondary: '#FF1744' },
     kantonal: { primary: '#1E88E5', secondary: '#42A5F5' },
@@ -324,11 +335,7 @@ const colorSchemes = {
     'AG': { primary: '#0F62FE', secondary: '#78A9FF' },
     'TG': { primary: '#0F62FE', secondary: '#78A9FF' },
     'TI': { primary: '#E60000', secondary: '#FF8080' },
-    'VD': { primary: '#1D8B4E', secondary: '#6FDC8C' },
-    'VS': { primary: '#E60000', secondary: '#FF8080' },
-    'NE': { primary: '#0F62FE', secondary: '#78A9FF' },
-    'GE': { primary: '#E60000', secondary: '#FF8080' },
-    'JU': { primary: '#E60000', secondary: '#FF8080' }
+    'VD': { primary: '#1D8B4E', secondary: '#6FDC8C' }
 };
 
 // Wappen-Pfade definieren (ersetzen Sie dies durch die tatsächlichen Pfade zu Ihren Bildern)
@@ -357,11 +364,7 @@ const coatOfArms = {
         'AG': '/images/ag-coat.svg',
         'TG': '/images/tg-coat.svg',
         'TI': '/images/ti-coat.svg',
-        'VD': '/images/vd-coat.svg',
-        'VS': '/images/vs-coat.svg',
-        'NE': '/images/ne-coat.svg',
-        'GE': '/images/ge-coat.svg',
-        'JU': '/images/ju-coat.svg'
+        'VD': '/images/vd-coat.svg'
     },
 };
 
@@ -374,7 +377,7 @@ const productOptions = [
 
 const PizzaDemokratieCalculator = () => {
     const [level, setLevel] = useState('');
-    const [canton, setCanton] = useState('');
+    const [canton, setCanton] = useState<CantonKeys | ''>('');
     const [city, setCity] = useState('');
     const [product, setProduct] = useState('authenticated');
     const [pricePerSignature, setPricePerSignature] = useState(4.0);
@@ -409,11 +412,11 @@ const PizzaDemokratieCalculator = () => {
 
     useEffect(() => {
         if (level === 'national') {
-            setColorScheme(colorSchemes.national);
+            setColorScheme(colorSchemes[canton as CantonKeys] || colorSchemes.national);
             setCurrentCoatOfArms(coatOfArms.national);
         } else if (level === 'kantonal' && canton) {
-            setColorScheme(colorSchemes[canton] || colorSchemes.kantonal);
-            setCurrentCoatOfArms(coatOfArms.kantonal[canton] || coatOfArms.default);
+            setColorScheme(colorSchemes[canton as CantonKeys] || colorSchemes.kantonal);
+            setCurrentCoatOfArms(coatOfArms.kantonal[canton as CantonKeys] || coatOfArms.default);
         } else {
             setColorScheme(colorSchemes.default);
             setCurrentCoatOfArms(coatOfArms.default);
@@ -425,6 +428,7 @@ const PizzaDemokratieCalculator = () => {
             setIsServiceAvailable(true);
         } else if (canton) {
             const cantonIsActive = cantonData[canton].active;
+
             const cityIsActive = level === 'kommunal' ? cantonData[canton].cities.find(c => c.name === city)?.active : true;
             setIsServiceAvailable(cantonIsActive && cityIsActive);
         }
@@ -493,7 +497,7 @@ const PizzaDemokratieCalculator = () => {
         }
     }, [level, canton, city, initiativeType, product, expressDelivery, pricePerSignature]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         if (isServiceAvailable) {
             console.log('Sending quote to email:', email);
@@ -538,7 +542,7 @@ const PizzaDemokratieCalculator = () => {
                         {(level === 'kantonal' || level === 'kommunal') && (
                             <div>
                                 <Label>Schritt 2: In welchem Kanton?</Label>
-                                <Select onValueChange={(value) => { setCanton(value); setCity(''); }}>
+                                <Select onValueChange={(value) => { setCanton(value as CantonKeys); setCity(''); }}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Wähle deinen Kanton" />
                                     </SelectTrigger>
