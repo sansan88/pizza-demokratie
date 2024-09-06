@@ -59,5 +59,10 @@ const config: Config = {
   	}
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: [
+    {
+      pattern: /^(bg|text|ring|border)-.+/,
+    }
+  ],
 };
 export default config;

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import Footer from '@/components/ui/footer';
 
 
 type CantonKeys = 'ZH' | 'BE' | 'LU' | 'UR' | 'SZ' | 'OW' | 'NW' | 'GL' | 'ZG' | 'FR' | 'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' | 'TI' | 'VD';
@@ -311,7 +312,7 @@ const cantonData: Record<CantonKeys, {
 
 // Farbschemata definieren
 const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { primary: string; secondary: string }> = {
-    default: { primary: '#dc0018', secondary: '#A0AEC0' },
+    default: { primary: '#4b0c13', secondary: '#E14456' },
     national: { primary: '#D50000', secondary: '#FF1744' },
     kantonal: { primary: '#1E88E5', secondary: '#42A5F5' },
     'ZH': { primary: '#0F62FE', secondary: '#78A9FF' },
@@ -340,7 +341,7 @@ const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { p
 
 // Wappen-Pfade definieren (ersetzen Sie dies durch die tatsächlichen Pfade zu Ihren Bildern)
 const coatOfArms = {
-    default: './images/swiss.svg',
+    default: './images/default.webp',
     national: '/images/swiss.svg',
     kantonal: {
         'ZH': '../images/zh.svg',
@@ -429,6 +430,11 @@ const PizzaDemokratieCalculator = () => {
     };
     const [isEmailValid, setIsEmailValid] = useState(false);
 
+    // Funktion zur Generierung eines eindeutigen Klassennamens basierend auf der Farbe
+    const getColorClass = (color: string, prefix: string) => {
+        return `${prefix}-[${color.replace('#', '')}]`;
+    };
+
     useEffect(() => {
         // Set the default product to 'authenticated' (second option)
         setProduct('authenticated');
@@ -463,6 +469,10 @@ const PizzaDemokratieCalculator = () => {
         }
     }, [level, canton, city]);
 
+    // Neuer useEffect-Hook für die dynamische Anpassung der Ring-Farbe
+    useEffect(() => {
+        document.documentElement.style.setProperty('--tw-ring-color', colorScheme.primary, '!important');
+    }, [colorScheme]);
 
     useEffect(() => {
         const selectedProduct = productOptions.find(p => p.id === product);
@@ -600,188 +610,195 @@ const PizzaDemokratieCalculator = () => {
     };
 
     return (
-        <Card className="w-full max-w-2xl mx-auto" style={{ borderColor: colorScheme.secondary }}>
-            <CardHeader style={{ backgroundColor: colorScheme.primary }}>
-                <CardTitle className="text-3xl font-bold text-center">Pizza Demokratie</CardTitle>
-                <img src={currentCoatOfArms} alt="Wappen" className="w-16 h-16 mx-auto mt-2" />
-            </CardHeader>
-            <CardContent className="space-y-6">
-                <div className="text-sm text-gray-600">
-                    <p>Willkommen bei Pizza Demokratie! Unser innovativer Rechner ermöglicht es Ihnen, schnell und einfach die Kosten für Ihr Volksbegehren zu ermitteln. Folgen Sie den untenstehenden Schritten, um Ihre persönliche Offerte zu erhalten. Egal ob Initiative oder Referendum, auf kommunaler, kantonaler oder nationaler Ebene - wir unterstützen Sie bei der Umsetzung Ihres demokratischen Anliegens.</p>
-                </div>
-                <form onSubmit={handleSubmit}>
-                    <div className="space-y-4">
-                        <div>
-                            <Label>Schritt {getStepNumber('level')}: Wo möchtest du dein Volksbegehren lancieren?</Label>
-                            <Select
-                                onValueChange={(value) => {
-                                    setLevel(value);
-                                    if (value === 'national') {
-                                        setCanton('');
-                                        setCity('');
-                                    } else if (value === 'kantonal') {
-                                        setCity('');
-                                    }
-                                    // Wenn auf 'kommunal' gewechselt wird, behalten wir den Kanton bei und setzen nur die Stadt zurück
-                                }}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Wähle die Ebene" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="national">National</SelectItem>
-                                    <SelectItem value="kantonal">Kantonal</SelectItem>
-                                    <SelectItem value="kommunal">Kommunal</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-
-                        {(level === 'kantonal' || level === 'kommunal') && (
-                            <div>
-                                <Label>Schritt {getStepNumber('canton')}: In welchem Kanton?</Label>
-                                <Select onValueChange={(value) => { setCanton(value as CantonKeys); setCity(''); }}>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Wähle deinen Kanton" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {Object.entries(cantonData).map(([code, data]) => (
-                                            <SelectItem key={code} value={code}>{data.name}</SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                        )}
-
-                        {level === 'kommunal' && canton && (
-                            <div>
-                                <Label>Schritt {getStepNumber('city')}: In welcher Stadt?</Label>
-                                <Select onValueChange={setCity}>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Wähle deine Stadt" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {cantonData[canton].cities.map((city) => (
-                                            <SelectItem key={city.name} value={city.name}>{city.name}</SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                        )}
-
-                        {!isServiceAvailable && (level === 'national' || canton) && (
-                            <Alert variant="destructive">
-                                <AlertDescription>
-                                    In diesem {level === 'kommunal' ? 'Ort' : level === 'kantonal' ? 'Kanton' : 'Land'} ist der Service leider noch nicht verfügbar.
-                                </AlertDescription>
-                                <Button onClick={handleNotifyMe} className="mt-2">
-                                    Bitte informieren Sie mich, wenn der Service verfügbar ist
-                                </Button>
-                            </Alert>
-                        )}
-
-                        <div>
-                            <Label>Schritt {getStepNumber('initiativeType')}: Wähle die Art des Volksbegehrens aus:</Label>
-
-                            <RadioGroup onValueChange={(value) => setInitiativeType(value as 'initiative' | 'referendum')} value={initiativeType}>
-                                <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="initiative" id="initiative" />
-                                    <Label htmlFor="initiative">Initiative</Label>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="referendum" id="referendum" />
-                                    <Label htmlFor="referendum">Referendum</Label>
-                                </div>
-                            </RadioGroup>
-                        </div>
-
-                        <div>
-                            <Label className="mb-2 block">Schritt {getStepNumber('product')}: Wähle dein Produkt:</Label>
-                            <div className="grid grid-cols-3 gap-4 mb-6">
-                                {productOptions.map((option, index) => (
-                                    <Card
-                                        key={option.id}
-                                        className={`cursor-pointer transition-all duration-300 ${product === option.id
-                                            ? 'ring-2 ring-blue-500 bg-blue-100 transform scale-105'
-                                            : 'hover:bg-gray-100'
-                                            }`}
-                                        onClick={() => setProduct(option.id)}
-                                    >
-                                        <CardHeader>
-                                            <CardTitle className={`${index === 1 ? 'text-blue-600' : ''}`}>
-                                                {option.name}
-                                            </CardTitle>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <p className="text-sm">{option.description}</p>
-                                            <p className="text-sm font-bold mt-2">CHF {option.pricePerSignature.toFixed(2)} / Unterschrift</p>
-                                        </CardContent>
-                                    </Card>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="flex items-center space-x-2">
-                            <Checkbox
-                                id="express"
-                                checked={expressDelivery}
-                                onCheckedChange={(checked) => setExpressDelivery(checked === true)}
-                            />
-                            <Label htmlFor="express">Expresslieferung (innerhalb eines Monats)</Label>
-                        </div>
-
-                        <div className="mt-6 p-4 bg-gray-100 rounded-md">
-                            <h3 className="text-lg font-semibold mb-2">Zusammenfassung:</h3>
-                            <p>Benötigte Unterschriften: {signatures > 0 ? signatures.toLocaleString() : '-'}</p>
-                            <p>Preis pro Unterschrift: CHF {pricePerSignature.toFixed(2)}</p>
-                            <p>Basispreis: {basePrice > 0 ? basePrice.toLocaleString() + ' CHF' : '-'}</p>
-                            <p>Zuschlag für Stimmberechtigte: {voterSurcharge > 0 ? voterSurcharge.toLocaleString() + ' CHF' : '-'}</p>
-                            {expressDelivery && (
-                                <>
-                                    <p>Expresslieferung: Ja</p>
-                                    <p>Zuschlag für Expresslieferung: {expressSurcharge > 0 ? expressSurcharge.toLocaleString() + ' CHF' : '-'}</p>
-                                </>
-                            )}
-                            <p className="text-xl font-bold mt-2">Gesamtpreis: {totalPrice > 0 ? totalPrice.toLocaleString() + ' CHF' : '-'}</p>
-                        </div>
-                        <div>
-                            <Label htmlFor="email">E-Mail für Offerte</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                value={email}
-                                onChange={handleEmailChange}
-                                required
-                            />
-                            {email && !isEmailValid && (
-                                <p className="text-red-500 text-sm mt-1">Bitte geben Sie eine gültige E-Mail-Adresse ein.</p>
-                            )}
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <Checkbox
-                                id="newsletter"
-                                checked={newsletter}
-                                onCheckedChange={(checked) => setNewsletter(checked === true)}
-                            />
-                            <Label htmlFor="newsletter">Für Newsletter anmelden</Label>
-                        </div>
-
-                        <Button
-                            type="submit"
-                            className="w-full"
-                            style={{
-                                backgroundColor: colorScheme.primary,
-                                color: 'white',
-                            }}
-                            disabled={!isServiceAvailable || !level || (level !== 'national' && !canton) || (level === 'kommunal' && !city) || !product || !isEmailValid}
-                        >
-                            Offerte anfordern
-                        </Button>
-
+        <>
+            <Card className="w-full max-w-2xl mx-auto" style={{ borderColor: colorScheme.secondary }}>
+                <CardHeader className="rounded-t-lg" style={{ backgroundColor: colorScheme.primary }}>
+                    <CardTitle className="text-3xl font-bold text-white text-center">Pizza Demokratie</CardTitle>
+                    <img src={currentCoatOfArms} alt="Wappen" className="h-16 mx-auto mt-2" />
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    <div className="text-sm text-gray-600 pt-4">
+                        <p>Willkommen bei Pizza Demokratie! Unser innovativer Rechner ermöglicht es Ihnen, schnell und einfach die Kosten für Ihr Volksbegehren zu ermitteln. Folgen Sie den untenstehenden Schritten, um Ihre persönliche Offerte zu erhalten. Egal ob Initiative oder Referendum, auf kommunaler, kantonaler oder nationaler Ebene - wir unterstützen Sie bei der Umsetzung Ihres demokratischen Anliegens.</p>
                     </div>
-                </form>
-            </CardContent>
-        </Card>
+                    <form onSubmit={handleSubmit}>
+                        <div className="space-y-4">
+                            <div>
+                                <Label>Schritt {getStepNumber('level')}: Wo möchtest du dein Volksbegehren lancieren?</Label>
+                                <Select
+                                    onValueChange={(value) => {
+                                        setLevel(value);
+                                        if (value === 'national') {
+                                            setCanton('');
+                                            setCity('');
+                                        } else if (value === 'kantonal') {
+                                            setCity('');
+                                        }
+                                        // Wenn auf 'kommunal' gewechselt wird, behalten wir den Kanton bei und setzen nur die Stadt zurück
+                                    }}
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Wähle die Ebene" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="national">National</SelectItem>
+                                        <SelectItem value="kantonal">Kantonal</SelectItem>
+                                        <SelectItem value="kommunal">Kommunal</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+
+                            {(level === 'kantonal' || level === 'kommunal') && (
+                                <div>
+                                    <Label>Schritt {getStepNumber('canton')}: In welchem Kanton?</Label>
+                                    <Select onValueChange={(value) => { setCanton(value as CantonKeys); setCity(''); }}>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Wähle deinen Kanton" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {Object.entries(cantonData).map(([code, data]) => (
+                                                <SelectItem key={code} value={code}>{data.name}</SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            )}
+
+                            {level === 'kommunal' && canton && (
+                                <div>
+                                    <Label>Schritt {getStepNumber('city')}: In welcher Stadt?</Label>
+                                    <Select onValueChange={setCity}>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Wähle deine Stadt" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {cantonData[canton].cities.map((city) => (
+                                                <SelectItem key={city.name} value={city.name}>{city.name}</SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            )}
+
+                            {!isServiceAvailable && (level === 'national' || canton) && (
+                                <Alert variant="destructive">
+                                    <AlertDescription>
+                                        In diesem {level === 'kommunal' ? 'Ort' : level === 'kantonal' ? 'Kanton' : 'Land'} ist der Service leider noch nicht verfügbar.
+                                    </AlertDescription>
+                                    <Button onClick={handleNotifyMe} className="mt-2">
+                                        Bitte informieren Sie mich, wenn der Service verfügbar ist
+                                    </Button>
+                                </Alert>
+                            )}
+
+                            <div>
+                                <Label>Schritt {getStepNumber('initiativeType')}: Wähle die Art des Volksbegehrens aus:</Label>
+
+                                <RadioGroup onValueChange={(value) => setInitiativeType(value as 'initiative' | 'referendum')} value={initiativeType}>
+                                    <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="initiative" id="initiative" />
+                                        <Label htmlFor="initiative">Initiative</Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="referendum" id="referendum" />
+                                        <Label htmlFor="referendum">Referendum</Label>
+                                    </div>
+                                </RadioGroup>
+                            </div>
+
+                            <div>
+                                <Label className="mb-2 block">Schritt {getStepNumber('product')}: Wähle dein Produkt:</Label>
+                                <div className="grid grid-cols-3 gap-4 mb-6">
+                                    {productOptions.map((option, index) => (
+                                        <Card
+                                            key={option.id}
+                                            style={{ borderColor: colorScheme.secondary }}
+                                            className={`cursor-pointer transition-all duration-300 ${product === option.id
+                                                    ? `ring-2 ${getColorClass(colorScheme.primary, 'ring')} ${getColorClass(colorScheme.secondary, 'bg')} bg-opacity-20 transform scale-105`
+                                                    : `hover:${getColorClass(colorScheme.secondary, 'bg')} hover:bg-opacity-10`
+                                                }`}
+                                            onClick={() => setProduct(option.id)}
+                                        >
+                                            <CardHeader>
+                                                <CardTitle className={`${index === 1 ? `text-[${colorScheme.primary}]` : ''}`}>
+                                                    {option.name}
+                                                </CardTitle>
+                                            </CardHeader>
+                                            <CardContent>
+                                                <p className="text-sm">{option.description}</p>
+                                                <p className="text-sm font-bold mt-2" style={{ color: colorScheme.primary }}>
+                                                    CHF {option.pricePerSignature.toFixed(2)} / Unterschrift
+                                                </p>
+                                            </CardContent>
+                                        </Card>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                                <Checkbox
+                                    id="express"
+                                    checked={expressDelivery}
+                                    onCheckedChange={(checked) => setExpressDelivery(checked === true)}
+                                />
+                                <Label htmlFor="express">Expresslieferung (innerhalb eines Monats)</Label>
+                            </div>
+
+                            <div className="mt-6 p-4 bg-gray-100 rounded-md">
+                                <h3 className="text-lg font-semibold mb-2">Zusammenfassung:</h3>
+                                <p>Benötigte Unterschriften: {signatures > 0 ? signatures.toLocaleString() : '-'}</p>
+                                <p>Preis pro Unterschrift: CHF {pricePerSignature.toFixed(2)}</p>
+                                <p>Basispreis: {basePrice > 0 ? basePrice.toLocaleString() + ' CHF' : '-'}</p>
+                                <p>Zuschlag für Stimmberechtigte: {voterSurcharge > 0 ? voterSurcharge.toLocaleString() + ' CHF' : '-'}</p>
+                                {expressDelivery && (
+                                    <>
+                                        <p>Expresslieferung: Ja</p>
+                                        <p>Zuschlag für Expresslieferung: {expressSurcharge > 0 ? expressSurcharge.toLocaleString() + ' CHF' : '-'}</p>
+                                    </>
+                                )}
+                                <p className="text-xl font-bold mt-2">Gesamtpreis: {totalPrice > 0 ? totalPrice.toLocaleString() + ' CHF' : '-'}</p>
+                            </div>
+                            <div>
+                                <Label htmlFor="email">E-Mail für Offerte</Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    value={email}
+                                    onChange={handleEmailChange}
+                                    required
+                                />
+                                {email && !isEmailValid && (
+                                    <p className="text-red-500 text-sm mt-1">Bitte geben Sie eine gültige E-Mail-Adresse ein.</p>
+                                )}
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <Checkbox
+                                    id="newsletter"
+                                    checked={newsletter}
+                                    onCheckedChange={(checked) => setNewsletter(checked === true)}
+                                />
+                                <Label htmlFor="newsletter">Für Newsletter anmelden</Label>
+                            </div>
+
+                            <Button
+                                type="submit"
+                                className="w-full"
+                                style={{
+                                    backgroundColor: colorScheme.primary,
+                                    color: 'white',
+                                }}
+                                disabled={!isServiceAvailable || !level || (level !== 'national' && !canton) || (level === 'kommunal' && !city) || !product || !isEmailValid}
+                            >
+                                Offerte anfordern
+                            </Button>
+
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
+            <Footer></Footer>
+        </>
     );
 };
+
 
 export default PizzaDemokratieCalculator;
