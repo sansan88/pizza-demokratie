@@ -12,6 +12,8 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 
 type CantonKeys = 'ZH' | 'BE' | 'LU' | 'UR' | 'SZ' | 'OW' | 'NW' | 'GL' | 'ZG' | 'FR' | 'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' | 'TI' | 'VD' ;
 
+
+
 const cantonData: Record<CantonKeys, {
     name: string;
     population: number;
@@ -394,7 +396,8 @@ const PizzaDemokratieCalculator = () => {
 
     const [colorScheme, setColorScheme] = useState(colorSchemes.default);
 
-    const [initiativeType, setInitiativeType] = useState('initiative');
+    // const [initiativeType, setInitiativeType] = useState('initiative');
+    const [initiativeType, setInitiativeType] = useState<'initiative' | 'referendum'>('initiative');
 
     const [currentCoatOfArms, setCurrentCoatOfArms] = useState(coatOfArms.default);
 
@@ -404,6 +407,7 @@ const PizzaDemokratieCalculator = () => {
         if (level === 'kommunal') return 4;
         return 5; // Fallback, falls kein Level ausgewählt wurde
     };
+
 
     useEffect(() => {
         // Set the default product to 'authenticated' (second option)
