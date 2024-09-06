@@ -657,7 +657,11 @@ const PizzaDemokratieCalculator = () => {
                         </div>
 
                         <div className="flex items-center space-x-2">
-                            <Checkbox id="newsletter" checked={newsletter} onCheckedChange={setNewsletter} />
+                            <Checkbox
+                                id="newsletter"
+                                checked={newsletter}
+                                onCheckedChange={(checked) => setNewsletter(checked === true)}
+                            />
                             <Label htmlFor="newsletter">Für Newsletter anmelden</Label>
                         </div>
 
