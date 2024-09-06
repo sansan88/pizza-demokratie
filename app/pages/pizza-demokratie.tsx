@@ -344,7 +344,7 @@ const coatOfArms = {
     national: '/images/swiss.svg',
     kantonal: {
         'ZH': '/images/zh.svg',
-        'BE': '/images/be-coat.svg',
+        'BE': '/images/be.svg',
         'LU': '/images/lu-coat.svg',
         'UR': '/images/ur-coat.svg',
         'SZ': '/images/sz-coat.svg',
@@ -364,7 +364,7 @@ const coatOfArms = {
         'AG': '/images/ag-coat.svg',
         'TG': '/images/tg-coat.svg',
         'TI': '/images/ti-coat.svg',
-        'VD': '/images/vd-coat.svg'
+        'VD': '/images/vd.svg'
     },
 };
 
