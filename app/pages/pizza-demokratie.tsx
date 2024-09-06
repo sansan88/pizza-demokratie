@@ -340,10 +340,10 @@ const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { p
 
 // Wappen-Pfade definieren (ersetzen Sie dies durch die tatsächlichen Pfade zu Ihren Bildern)
 const coatOfArms = {
-    default: '/images/default-coat.svg',
-    national: '/images/swiss-coat.svg',
+    default: '/images/swiss.svg',
+    national: '/images/swiss.svg',
     kantonal: {
-        'ZH': '/images/zh-coat.svg',
+        'ZH': '/images/zh.svg',
         'BE': '/images/be-coat.svg',
         'LU': '/images/lu-coat.svg',
         'UR': '/images/ur-coat.svg',
@@ -356,7 +356,7 @@ const coatOfArms = {
         'SO': '/images/so-coat.svg',
         'BS': '/images/bs-coat.svg',
         'BL': '/images/bl-coat.svg',
-        'SH': '/images/sh-coat.svg',
+        'SH': '/images/sh.svg',
         'AR': '/images/ar-coat.svg',
         'AI': '/images/ai-coat.svg',
         'SG': '/images/sg-coat.svg',
