@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
 import Cors from 'cors';
-import initMiddleware from '../../../lib/init-middleware';
+import initMiddleware from '../../lib/init-middleware';
 
 const cors = initMiddleware(
   Cors({

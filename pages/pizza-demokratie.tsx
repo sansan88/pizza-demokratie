@@ -340,10 +340,10 @@ const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { p
 
 // Wappen-Pfade definieren (ersetzen Sie dies durch die tatsächlichen Pfade zu Ihren Bildern)
 const coatOfArms = {
-    default: '/images/swiss.svg',
+    default: './images/swiss.svg',
     national: '/images/swiss.svg',
     kantonal: {
-        'ZH': '/images/zh.svg',
+        'ZH': '../images/zh.svg',
         'BE': '/images/be.svg',
         'LU': '/images/lu-coat.svg',
         'UR': '/images/ur-coat.svg',
@@ -356,7 +356,7 @@ const coatOfArms = {
         'SO': '/images/so-coat.svg',
         'BS': '/images/bs-coat.svg',
         'BL': '/images/bl-coat.svg',
-        'SH': '/images/sh.svg',
+        'SH': 'images/sh.svg',
         'AR': '/images/ar-coat.svg',
         'AI': '/images/ai-coat.svg',
         'SG': '/images/sg-coat.svg',
@@ -418,6 +418,16 @@ const PizzaDemokratieCalculator = () => {
         if (level === 'kommunal') return currentStep === 'level' ? 1 : currentStep === 'canton' ? 2 : currentStep === 'city' ? 3 : currentStep === 'initiativeType' ? 4 : 5;
         return 1; // Fallback
     };
+    const isValidEmail = (email: string): boolean => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+        setIsEmailValid(isValidEmail(newEmail));
+    };
+    const [isEmailValid, setIsEmailValid] = useState(false);
 
     useEffect(() => {
         // Set the default product to 'authenticated' (second option)
@@ -530,7 +540,7 @@ const PizzaDemokratieCalculator = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (isServiceAvailable) {
-          const message = `Ihre Offerte:
+            const message = `Ihre Offerte:
             Ebene: ${level}
             Kanton: ${canton}
             Stadt: ${city}
@@ -538,27 +548,27 @@ const PizzaDemokratieCalculator = () => {
             Produkt: ${product}
             Expresslieferung: ${expressDelivery ? 'Ja' : 'Nein'}
             Gesamtpreis: ${totalPrice} CHF`;
-      
-          try {
-            const response = await fetch('/api/send-email', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ email, message, newsletter }),
-            });
-      
-            if (response.ok) {
-              alert('Offerte wurde erfolgreich gesendet!');
-            } else {
-              throw new Error('Failed to send email');
+
+            try {
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, message, newsletter }),
+                });
+
+                if (response.ok) {
+                    alert('Offerte wurde erfolgreich gesendet!');
+                } else {
+                    throw new Error('Failed to send email');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Es gab einen Fehler beim Senden der Offerte. Bitte versuchen Sie es später erneut.');
             }
-          } catch (error) {
-            console.error('Error:', error);
-            alert('Es gab einen Fehler beim Senden der Offerte. Bitte versuchen Sie es später erneut.');
-          }
         }
-      };
+    };
 
     /*const handleNotifyMe = () => {
         console.log('Notify me when service is available in:', level === 'national' ? 'Switzerland' : canton, level === 'kommunal' ? city : '');
@@ -567,27 +577,27 @@ const PizzaDemokratieCalculator = () => {
     const handleNotifyMe = async () => {
         const location = level === 'national' ? 'Switzerland' : level === 'kommunal' ? `${city}, ${canton}` : canton;
         const message = `Bitte benachrichtigen Sie mich, wenn der Service verfügbar ist in: ${location}`;
-      
+
         try {
-          const response = await fetch('/api/send-email', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, message, newsletter: false }),
-          });
-          console.log(response.status)
-      
-          if (response.ok) {
-            alert('Wir werden Sie benachrichtigen, sobald der Service verfügbar ist!');
-          } else {
-            throw new Error('Failed to send notification request');
-          }
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, message, newsletter: false }),
+            });
+            console.log(response.status)
+
+            if (response.ok) {
+                alert('Wir werden Sie benachrichtigen, sobald der Service verfügbar ist!');
+            } else {
+                throw new Error('Failed to send notification request');
+            }
         } catch (error) {
-          console.error('Error:', error);
-          alert('Es gab einen Fehler bei der Verarbeitung Ihrer Anfrage. Bitte versuchen Sie es später erneut.');
+            console.error('Error:', error);
+            alert('Es gab einen Fehler bei der Verarbeitung Ihrer Anfrage. Bitte versuchen Sie es später erneut.');
         }
-      };
+    };
 
     return (
         <Card className="w-full max-w-2xl mx-auto" style={{ borderColor: colorScheme.secondary }}>
@@ -735,9 +745,17 @@ const PizzaDemokratieCalculator = () => {
                         </div>
                         <div>
                             <Label htmlFor="email">E-Mail für Offerte</Label>
-                            <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                            <Input
+                                id="email"
+                                type="email"
+                                value={email}
+                                onChange={handleEmailChange}
+                                required
+                            />
+                            {email && !isEmailValid && (
+                                <p className="text-red-500 text-sm mt-1">Bitte geben Sie eine gültige E-Mail-Adresse ein.</p>
+                            )}
                         </div>
-
                         <div className="flex items-center space-x-2">
                             <Checkbox
                                 id="newsletter"
@@ -754,10 +772,11 @@ const PizzaDemokratieCalculator = () => {
                                 backgroundColor: colorScheme.primary,
                                 color: 'white',
                             }}
-                            disabled={!isServiceAvailable || !level || (level !== 'national' && !canton) || (level === 'kommunal' && !city) || !product}
+                            disabled={!isServiceAvailable || !level || (level !== 'national' && !canton) || (level === 'kommunal' && !city) || !product || !isEmailValid}
                         >
                             Offerte anfordern
                         </Button>
+
                     </div>
                 </form>
             </CardContent>

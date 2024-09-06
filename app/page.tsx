@@ -1,4 +1,4 @@
-import PizzaDemokratieCalculator from "./pages/pizza-demokratie";
+import PizzaDemokratieCalculator from "../pages/pizza-demokratie";
 
 export default function Home() {
   return (
