@@ -517,7 +517,7 @@ const PizzaDemokratieCalculator = () => {
         }
     }, [level, canton, city, initiativeType, product, expressDelivery, pricePerSignature]);
 
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
+    /*const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         if (isServiceAvailable) {
             console.log('Sending quote to email:', email);
@@ -526,12 +526,67 @@ const PizzaDemokratieCalculator = () => {
             }
             // Here you would typically send this data to your backend
         }
-    };
+    };*/
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (isServiceAvailable) {
+          const message = `Ihre Offerte:
+            Ebene: ${level}
+            Kanton: ${canton}
+            Stadt: ${city}
+            Typ: ${initiativeType}
+            Produkt: ${product}
+            Expresslieferung: ${expressDelivery ? 'Ja' : 'Nein'}
+            Gesamtpreis: ${totalPrice} CHF`;
+      
+          try {
+            const response = await fetch('/api/send-email', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ email, message, newsletter }),
+            });
+      
+            if (response.ok) {
+              alert('Offerte wurde erfolgreich gesendet!');
+            } else {
+              throw new Error('Failed to send email');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+            alert('Es gab einen Fehler beim Senden der Offerte. Bitte versuchen Sie es später erneut.');
+          }
+        }
+      };
 
-    const handleNotifyMe = () => {
+    /*const handleNotifyMe = () => {
         console.log('Notify me when service is available in:', level === 'national' ? 'Switzerland' : canton, level === 'kommunal' ? city : '');
         // Here you would typically send this data to your backend
-    };
+    };*/
+    const handleNotifyMe = async () => {
+        const location = level === 'national' ? 'Switzerland' : level === 'kommunal' ? `${city}, ${canton}` : canton;
+        const message = `Bitte benachrichtigen Sie mich, wenn der Service verfügbar ist in: ${location}`;
+      
+        try {
+          const response = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, message, newsletter: false }),
+          });
+      
+          if (response.ok) {
+            alert('Wir werden Sie benachrichtigen, sobald der Service verfügbar ist!');
+          } else {
+            throw new Error('Failed to send notification request');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Es gab einen Fehler bei der Verarbeitung Ihrer Anfrage. Bitte versuchen Sie es später erneut.');
+        }
+      };
 
     return (
         <Card className="w-full max-w-2xl mx-auto" style={{ borderColor: colorScheme.secondary }}>
