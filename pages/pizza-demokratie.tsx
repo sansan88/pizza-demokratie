@@ -447,9 +447,9 @@ const PizzaDemokratieCalculator = () => {
 
     useEffect(() => {
         if (level === 'national') {
-            setColorScheme(colorSchemes[canton as CantonKeys] || colorSchemes.national);
+            setColorScheme(colorSchemes.national);
             setCurrentCoatOfArms(coatOfArms.national);
-        } else if (level === 'kantonal' && canton) {
+        } else if ((level === 'kantonal' || level === 'kommunal') && canton) {
             setColorScheme(colorSchemes[canton as CantonKeys] || colorSchemes.kantonal);
             setCurrentCoatOfArms(coatOfArms.kantonal[canton as CantonKeys] || coatOfArms.default);
         } else {
