@@ -719,7 +719,7 @@ const PizzaDemokratieCalculator = () => {
                     <CardContent className="space-y-6 p-6">
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
-                                <Label>Schritt {getStepNumber('level')}: Wo möchtest du dein Volksbegehren lancieren?</Label>
+                                <Label className="text-lg font-semibold mb-4 block">Schritt {getStepNumber('level')}: Wo möchtest du dein Volksbegehren lancieren?</Label>
                                 <Select
                                     onValueChange={(value) => {
                                         setLevel(value);
@@ -745,7 +745,7 @@ const PizzaDemokratieCalculator = () => {
 
                             {(level === 'kantonal' || level === 'kommunal') && (
                                 <div>
-                                    <Label>Schritt {getStepNumber('canton')}: In welchem Kanton?</Label>
+                                    <Label className="text-lg font-semibold mb-4 block">Schritt {getStepNumber('canton')}: In welchem Kanton?</Label>
                                     <Select onValueChange={(value) => { setCanton(value as CantonKeys); setCity(''); }}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Wähle deinen Kanton" />
@@ -767,7 +767,7 @@ const PizzaDemokratieCalculator = () => {
 
                             {level === 'kommunal' && canton && (
                                 <div>
-                                    <Label>Schritt {getStepNumber('city')}: In welcher Stadt?</Label>
+                                    <Label className="text-lg font-semibold mb-4 block">Schritt {getStepNumber('city')}: In welcher Stadt?</Label>
                                     <Select onValueChange={setCity}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Wähle deine Stadt" />
@@ -811,7 +811,7 @@ const PizzaDemokratieCalculator = () => {
                             )}
 
                             <div>
-                                <Label>Schritt {getStepNumber('initiativeType')}: Wähle die Art des Volksbegehrens aus:</Label>
+                                <Label className="text-lg font-semibold mb-4 block">Schritt {getStepNumber('initiativeType')}: Wähle die Art des Volksbegehrens aus:</Label>
 
                                 <RadioGroup onValueChange={(value) => setInitiativeType(value as 'initiative' | 'referendum')} value={initiativeType}>
                                     <div className="flex items-center space-x-2">
