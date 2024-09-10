@@ -1,10 +1,10 @@
 import React from 'react';
 import Footer from '@/components/ui/footer';
-import Datenschutz from '@/components/ui/datenschutz';
+import Datenschutz from '@/components/datenschutz';
 
 const ImpressumPage = () => {
   return (
-    <div>
+    <div className="App">
       <Datenschutz />
       <Footer />
     </div>

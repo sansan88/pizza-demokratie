@@ -1,10 +1,10 @@
 import React from 'react';
-import Impressum from '@/components/ui/impressum';
-import Footer from '@/components/ui/footer';
+import Impressum from '../components/impressum';
+import Footer from '../components/ui/footer';
 
 const ImpressumPage = () => {
   return (
-    <div>
+    <div className="App">
       <Impressum />
       <Footer />
     </div>
