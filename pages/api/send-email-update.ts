@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       await transporter.sendMail({
         from: '"Pizza Demokratie" <info@pizza-demokratie.ch>',
         to: email,
-        bcc: ["info@sfdd.ch", "daniel.graf@publicbeta.ch"],
+        bcc: ["info@sfdd.ch"],
         subject: "Pizza Demokratie - Wir informieren Sie sobald der Service verfügbar ist",
         text: message,
       });

@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       await transporter.sendMail({
         from: '"Pizza Demokratie" <info@pizza-demokratie.ch>',
         to: email,
-        bcc: ["info@sfdd.ch", "daniel.graf@publicbeta.ch"],
+        bcc: ["info@sfdd.ch"],
         subject: "Ihre Offerte von Pizza Demokratie",
         text: message,
       });
@@ -44,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         await transporter.sendMail({
           from: '"Pizza Demokratie Newsletter" <info@pizza-demokratie.ch>',
           to: email,
-          bcc: ["info@sfdd.ch", "daniel.graf@publicbeta.ch"],
+          bcc: ["info@sfdd.ch"],
           subject: "Newsletter von Pizza Demokratie",
           text: "Wir tragen Sie in unseren Newsletter ein",
         });
