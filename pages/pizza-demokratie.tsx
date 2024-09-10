@@ -29,10 +29,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
     Object.entries({
         'ZH': {
             name: 'Zürich',
-            population: 1539275,
+            population: 1583655, // Updated population
             eligibleVoters: 1026700,
-            initiative: 6000,
-            referendum: 3000,
+            initiative: 6000, // Updated initiative signatures
+            referendum: 3000, // Updated referendum signatures
             active: true,
             cities: [
                 { name: 'Zürich', population: 415367, eligibleVoters: 277000, initiative: 3000, referendum: 2000, active: true },
@@ -42,10 +42,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'SH': {
             name: 'Schaffhausen',
-            population: 82348,
+            population: 84096, // Updated population
             eligibleVoters: 52330,
-            initiative: 1000,
-            referendum: 800,
+            initiative: 1000, // Updated initiative signatures
+            referendum: 1000, // Updated referendum signatures
             active: true,
             cities: [
                 { name: 'Schaffhausen', population: 36000, eligibleVoters: 22900, initiative: 800, referendum: 600, active: true },
@@ -55,10 +55,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'VD': {
             name: 'Waadt',
-            population: 805098,
+            population: 837398, // Updated population
             eligibleVoters: 537000,
-            initiative: 12000,
-            referendum: 12000,
+            initiative: 12000, // (18000 for Totalrevision)
+            referendum: 12000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Lausanne', population: 139111, eligibleVoters: 92700, initiative: 2000, referendum: 2000, active: false },
@@ -68,10 +68,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'BE': {
             name: 'Bern',
-            population: 1034977,
+            population: 1063215, // Updated population
             eligibleVoters: 690200,
-            initiative: 15000,
-            referendum: 10000,
+            initiative: 15000, // (30000 for Totalrevision)
+            referendum: 10000, // Updated referendum signatures
             active: true,
             cities: [
                 { name: 'Bern', population: 133883, eligibleVoters: 89200, initiative: 2000, referendum: 1500, active: true },
@@ -81,10 +81,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'LU': {
             name: 'Luzern',
-            population: 413120,
+            population: 421189, // Updated population
             eligibleVoters: 275600,
-            initiative: 4000,
-            referendum: 3000,
+            initiative: 5000, // Updated initiative signatures
+            referendum: 3000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Luzern', population: 81500, eligibleVoters: 54300, initiative: 1500, referendum: 1000, active: false },
@@ -94,10 +94,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'UR': {
             name: 'Uri',
-            population: 36703,
+            population: 37082, // Updated population
             eligibleVoters: 24500,
-            initiative: 600,
-            referendum: 450,
+            initiative: 600, // Updated initiative signatures
+            referendum: 450, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Altdorf', population: 9400, eligibleVoters: 6300, initiative: 300, referendum: 200, active: false },
@@ -107,10 +107,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'SZ': {
             name: 'Schwyz',
-            population: 160480,
+            population: 163689, // Updated population
             eligibleVoters: 107000,
-            initiative: 2000,
-            referendum: 1000,
+            initiative: 2000, // Updated initiative signatures
+            referendum: 1000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Schwyz', population: 14900, eligibleVoters: 9900, initiative: 500, referendum: 250, active: false },
@@ -120,10 +120,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'OW': {
             name: 'Obwalden',
-            population: 37930,
+            population: 38427, // Updated population
             eligibleVoters: 25300,
-            initiative: 500,
-            referendum: 100,
+            initiative: 500, // (1000 for Totalrevision)
+            referendum: 100, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Sarnen', population: 10000, eligibleVoters: 6700, initiative: 200, referendum: 50, active: false },
@@ -133,10 +133,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'NW': {
             name: 'Nidwalden',
-            population: 43087,
+            population: 44098, // Updated population
             eligibleVoters: 28700,
-            initiative: 500,
-            referendum: 250,
+            initiative: 500, // (1000 for Totalrevision)
+            referendum: 250, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Stans', population: 8000, eligibleVoters: 5300, initiative: 150, referendum: 75, active: false },
@@ -146,10 +146,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'GL': {
             name: 'Glarus',
-            population: 40590,
+            population: 41150, // Updated population
             eligibleVoters: 27100,
-            initiative: 1,
-            referendum: 1,
+            initiative: 1, // Updated initiative signatures
+            referendum: 1, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Glarus', population: 12500, eligibleVoters: 8300, initiative: 1, referendum: 1, active: false },
@@ -159,10 +159,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'ZG': {
             name: 'Zug',
-            population: 127642,
+            population: 130243, // Updated population
             eligibleVoters: 85100,
-            initiative: 2000,
-            referendum: 1500,
+            initiative: 2000, // Updated initiative signatures
+            referendum: 1500, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Zug', population: 30500, eligibleVoters: 20300, initiative: 700, referendum: 525, active: false },
@@ -172,10 +172,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'FR': {
             name: 'Freiburg',
-            population: 321783,
+            population: 330235, // Updated population
             eligibleVoters: 214500,
-            initiative: 6000,
-            referendum: 6000,
+            initiative: 6000, // Updated initiative signatures
+            referendum: 6000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Freiburg', population: 38000, eligibleVoters: 25300, initiative: 1200, referendum: 1200, active: false },
@@ -185,10 +185,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'SO': {
             name: 'Solothurn',
-            population: 275247,
+            population: 280232, // Updated population
             eligibleVoters: 183500,
-            initiative: 3000,
-            referendum: 1500,
+            initiative: 3000, // Updated initiative signatures
+            referendum: 1500, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Solothurn', population: 16700, eligibleVoters: 11100, initiative: 600, referendum: 300, active: false },
@@ -198,10 +198,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'BS': {
             name: 'Basel-Stadt',
-            population: 195844,
+            population: 199982, // Updated population
             eligibleVoters: 130600,
-            initiative: 3000,
-            referendum: 2000,
+            initiative: 3000, // Updated initiative signatures
+            referendum: 2000, // Updated referendum signatures
             active: true,
             cities: [
                 { name: 'Basel', population: 170000, eligibleVoters: 113300, initiative: 2500, referendum: 1800, active: true },
@@ -211,10 +211,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'BL': {
             name: 'Basel-Landschaft',
-            population: 289468,
+            population: 298784, // Updated population
             eligibleVoters: 193000,
-            initiative: 1500,
-            referendum: 1500,
+            initiative: 1500, // Updated initiative signatures
+            referendum: 1500, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Liestal', population: 14200, eligibleVoters: 9500, initiative: 300, referendum: 300, active: false },
@@ -224,10 +224,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'AR': {
             name: 'Appenzell Ausserrhoden',
-            population: 55234,
+            population: 56487, // Updated population
             eligibleVoters: 36800,
-            initiative: 300,
-            referendum: 300,
+            initiative: 300, // Updated initiative signatures
+            referendum: 300, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Herisau', population: 15000, eligibleVoters: 10000, initiative: 150, referendum: 150, active: false },
@@ -237,10 +237,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'AI': {
             name: 'Appenzell Innerrhoden',
-            population: 16145,
+            population: 16585, // Updated population
             eligibleVoters: 10800,
-            initiative: 1,
-            referendum: 200,
+            initiative: 1, // Updated initiative signatures
+            referendum: 200, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Appenzell', population: 5800, eligibleVoters: 3900, initiative: 1, referendum: 100, active: false },
@@ -250,10 +250,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'SG': {
             name: 'St. Gallen',
-            population: 510734,
+            population: 521971, // Updated population
             eligibleVoters: 340500,
-            initiative: 6000,
-            referendum: 4000,
+            initiative: 8000, // Updated initiative signatures
+            referendum: 4000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'St. Gallen', population: 75000, eligibleVoters: 50000, initiative: 1500, referendum: 1000, active: false },
@@ -263,10 +263,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'GR': {
             name: 'Graubünden',
-            population: 199021,
+            population: 201376, // Updated population
             eligibleVoters: 132700,
-            initiative: 3000,
-            referendum: 1500,
+            initiative: 4000, // Updated initiative signatures
+            referendum: 1500, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Chur', population: 35000, eligibleVoters: 23300, initiative: 900, referendum: 450, active: false },
@@ -276,10 +276,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'AG': {
             name: 'Aargau',
-            population: 685845,
+            population: 726833, // Updated population
             eligibleVoters: 457200,
-            initiative: 3000,
-            referendum: 3000,
+            initiative: 3000, // Updated initiative signatures
+            referendum: 3000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Aarau', population: 21000, eligibleVoters: 14000, initiative: 500, referendum: 500, active: false },
@@ -289,10 +289,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'TG': {
             name: 'Thurgau',
-            population: 279547,
+            population: 287905, // Updated population
             eligibleVoters: 186400,
-            initiative: 4000,
-            referendum: 2000,
+            initiative: 4000, // Updated initiative signatures
+            referendum: 2000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Frauenfeld', population: 25000, eligibleVoters: 16700, initiative: 800, referendum: 400, active: false },
@@ -302,10 +302,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'TI': {
             name: 'Tessin',
-            population: 350986,
+            population: 349908, // Updated population
             eligibleVoters: 234000,
-            initiative: 7000,
-            referendum: 7000,
+            initiative: 10000, // Updated initiative signatures
+            referendum: 7000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Lugano', population: 62000, eligibleVoters: 41300, initiative: 2000, referendum: 2000, active: false },
@@ -313,12 +313,13 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
                 { name: 'Locarno', population: 15000, eligibleVoters: 10000, initiative: 700, referendum: 700, active: false }
             ]
         },
+
         'VS': {
             name: 'Wallis',
-            population: 345525,
+            population: 353509, // Updated population
             eligibleVoters: 230350,
-            initiative: 5000,
-            referendum: 3000,
+            initiative: 6000, // Updated initiative signatures
+            referendum: 3000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Sion', population: 34710, eligibleVoters: 23140, initiative: 800, referendum: 500, active: false },
@@ -328,10 +329,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'NE': {
             name: 'Neuenburg',
-            population: 176496,
+            population: 174554, // Updated population
             eligibleVoters: 117660,
-            initiative: 4500,
-            referendum: 3000,
+            initiative: 6000, // (10000 for Totalrevision)
+            referendum: 4500, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Neuenburg', population: 33355, eligibleVoters: 22240, initiative: 1000, referendum: 700, active: false },
@@ -341,10 +342,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'GE': {
             name: 'Genf',
-            population: 499480,
+            population: 516379, // Updated population
             eligibleVoters: 332990,
-            initiative: 8000,
-            referendum: 5000,
+            initiative: '3% der Stimmberechtigten', // Updated initiative signatures
+            referendum: '2% der Stimmberechtigten bzw. 500 Stimmberechtigte', // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Genf', population: 201818, eligibleVoters: 134550, initiative: 3000, referendum: 2000, active: false },
@@ -354,10 +355,10 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
         },
         'JU': {
             name: 'Jura',
-            population: 73584,
+            population: 73907, // Updated population
             eligibleVoters: 49060,
-            initiative: 2000,
-            referendum: 1000,
+            initiative: 2000, // Updated initiative signatures
+            referendum: 2000, // Updated referendum signatures
             active: false,
             cities: [
                 { name: 'Delsberg', population: 12500, eligibleVoters: 8330, initiative: 500, referendum: 300, active: false },
@@ -789,23 +790,23 @@ const PizzaDemokratieCalculator = () => {
 
                             {!isServiceAvailable && (level === 'national' || canton) && (
                                 <Alert variant="destructive">
-                                <AlertDescription>
-                                    In diesem {level === 'kommunal' ? 'Ort' : level === 'kantonal' ? 'Kanton' : 'Land'} ist der Service leider noch nicht verfügbar.
-                                </AlertDescription>
-                                <Input
-                                    type="email"
-                                    placeholder="Ihre E-Mail-Adresse"
-                                    value={email}
-                                    onChange={handleEmailChange}
-                                    className="mt-2"
-                                />
-                                <Button
-                                    onClick={handleNotifyMe}
-                                    className="mt-2"
-                                    disabled={!isEmailValid}
-                                >
-                                    Bitte informieren Sie mich, wenn der Service verfügbar ist
-                                </Button>
+                                    <AlertDescription>
+                                        In diesem {level === 'kommunal' ? 'Ort' : level === 'kantonal' ? 'Kanton' : 'Land'} ist der Service leider noch nicht verfügbar.
+                                    </AlertDescription>
+                                    <Input
+                                        type="email"
+                                        placeholder="Ihre E-Mail-Adresse"
+                                        value={email}
+                                        onChange={handleEmailChange}
+                                        className="mt-2"
+                                    />
+                                    <Button
+                                        onClick={handleNotifyMe}
+                                        className="mt-2"
+                                        disabled={!isEmailValid}
+                                    >
+                                        Bitte informieren Sie mich, wenn der Service verfügbar ist
+                                    </Button>
                                 </Alert>
 
                             )}
