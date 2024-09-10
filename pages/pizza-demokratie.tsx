@@ -10,12 +10,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import Footer from '@/components/ui/footer';
 
+type CantonKeys =
+    'ZH' | 'BE' | 'LU' | 'UR' | 'SZ' | 'OW' | 'NW' | 'GL' | 'ZG' | 'FR' |
+    'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' |
+    'TI' | 'VD' | 'VS' | 'NE' | 'GE' | 'JU';
 
-type CantonKeys = 
-  'ZH' | 'BE' | 'LU' | 'UR' | 'SZ' | 'OW' | 'NW' | 'GL' | 'ZG' | 'FR' | 
-  'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' | 
-  'TI' | 'VD' | 'VS' | 'NE' | 'GE' | 'JU';
-  
 const cantonData: Record<CantonKeys, {
     name: string;
     population: number;
@@ -689,7 +688,7 @@ const PizzaDemokratieCalculator = () => {
 
     return (
         <div className="min-h-screen bg-gray-100">
-           <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
                 <div className="container mx-auto px-4 flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                         <img src="/images/pizza.png" alt="Pizza Logo" className="h-8 w-8" />
@@ -744,7 +743,13 @@ const PizzaDemokratieCalculator = () => {
                                         </SelectTrigger>
                                         <SelectContent>
                                             {Object.entries(cantonData).map(([code, data]) => (
-                                                <SelectItem key={code} value={code}>{data.name}</SelectItem>
+                                                <SelectItem
+                                                    key={code}
+                                                    value={code}
+                                                    active={data.active}
+                                                >
+                                                    {data.name}
+                                                </SelectItem>
                                             ))}
                                         </SelectContent>
                                     </Select>
@@ -760,7 +765,13 @@ const PizzaDemokratieCalculator = () => {
                                         </SelectTrigger>
                                         <SelectContent>
                                             {cantonData[canton].cities.map((city) => (
-                                                <SelectItem key={city.name} value={city.name}>{city.name}</SelectItem>
+                                                <SelectItem
+                                                    key={city.name}
+                                                    value={city.name}
+                                                    active={city.active}
+                                                >
+                                                    {city.name}
+                                                </SelectItem>
                                             ))}
                                         </SelectContent>
                                     </Select>
@@ -799,11 +810,10 @@ const PizzaDemokratieCalculator = () => {
                                     {productOptions.map((option, index) => (
                                         <Card
                                             key={option.id}
-                                            className={`cursor-pointer transition-all duration-300 hover:shadow-xl ${
-                                                product === option.id
-                                                    ? `ring-2 ring-offset-2 ${getColorClass(colorScheme.primary, 'ring')} ${getColorClass(colorScheme.secondary, 'bg')} bg-opacity-20 transform scale-105`
-                                                    : 'hover:bg-gray-50'
-                                            }`}
+                                            className={`cursor-pointer transition-all duration-300 hover:shadow-xl ${product === option.id
+                                                ? `ring-2 ring-offset-2 ${getColorClass(colorScheme.primary, 'ring')} ${getColorClass(colorScheme.secondary, 'bg')} bg-opacity-20 transform scale-105`
+                                                : 'hover:bg-gray-50'
+                                                }`}
                                             onClick={() => setProduct(option.id)}
                                         >
                                             <CardHeader>
