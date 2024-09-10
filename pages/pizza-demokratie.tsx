@@ -707,7 +707,7 @@ const PizzaDemokratieCalculator = () => {
 
                             <div>
                                 <Label className="mb-2 block">Schritt {getStepNumber('product')}: Wähle dein Produkt:</Label>
-                                <div className="grid grid-cols-3 gap-4 mb-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                                     {productOptions.map((option, index) => (
                                         <Card
                                             key={option.id}
@@ -719,13 +719,13 @@ const PizzaDemokratieCalculator = () => {
                                             onClick={() => setProduct(option.id)}
                                         >
                                             <CardHeader>
-                                                <CardTitle className={`${index === 1 ? `text-[${colorScheme.primary}]` : ''}`}>
+                                                <CardTitle className={`${index === 1 ? getColorClass(colorScheme.primary, 'text') : ''}`}>
                                                     {option.name}
                                                 </CardTitle>
                                             </CardHeader>
                                             <CardContent>
                                                 <p className="text-sm">{option.description}</p>
-                                                <p className="text-sm font-bold mt-2" style={{ color: colorScheme.primary }}>
+                                                <p className={`text-sm font-bold mt-2 ${getColorClass(colorScheme.primary, 'text')}`}>
                                                     CHF {option.pricePerSignature.toFixed(2)} / Unterschrift
                                                 </p>
                                             </CardContent>
