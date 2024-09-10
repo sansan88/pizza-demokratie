@@ -713,8 +713,8 @@ const PizzaDemokratieCalculator = () => {
                                             key={option.id}
                                             style={{ borderColor: colorScheme.secondary }}
                                             className={`cursor-pointer transition-all duration-300 ${product === option.id
-                                                    ? `ring-2 ${getColorClass(colorScheme.primary, 'ring')} ${getColorClass(colorScheme.secondary, 'bg')} bg-opacity-20 transform scale-105`
-                                                    : `hover:${getColorClass(colorScheme.secondary, 'bg')} hover:bg-opacity-10`
+                                                ? `ring-2 ${getColorClass(colorScheme.primary, 'ring')} ${getColorClass(colorScheme.secondary, 'bg')} bg-opacity-20 transform scale-105`
+                                                : `hover:${getColorClass(colorScheme.secondary, 'bg')} hover:bg-opacity-10`
                                                 }`}
                                             onClick={() => setProduct(option.id)}
                                         >
@@ -793,9 +793,9 @@ const PizzaDemokratieCalculator = () => {
 
                         </div>
                     </form>
+                    <Footer></Footer>
                 </CardContent>
             </Card>
-            <Footer></Footer>
         </>
     );
 };
