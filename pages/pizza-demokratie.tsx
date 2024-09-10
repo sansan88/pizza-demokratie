@@ -312,7 +312,7 @@ const cantonData: Record<CantonKeys, {
 
 // Farbschemata definieren
 const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { primary: string; secondary: string }> = {
-    default: { primary: '#868685', secondary: '#e4e1d8' },
+    default: { primary: '#111827', secondary: '#374151' },
     national: { primary: '#D50000', secondary: '#FF1744' },
     kantonal: { primary: '#1E88E5', secondary: '#42A5F5' },
     'ZH': { primary: '#0F62FE', secondary: '#78A9FF' },
@@ -341,7 +341,7 @@ const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { p
 
 // Wappen-Pfade definieren (ersetzen Sie dies durch die tatsächlichen Pfade zu Ihren Bildern)
 const coatOfArms = {
-    default: './images/pizza.jpg',
+    default: './images/pizza.png',
     national: '/images/swiss.svg',
     kantonal: {
         'ZH': '../images/zh.svg',
@@ -434,6 +434,21 @@ const PizzaDemokratieCalculator = () => {
     const getColorClass = (color: string, prefix: string) => {
         return `${prefix}-[${color.replace('#', '')}]`;
     };
+
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const offset = window.scrollY;
+            setIsScrolled(offset > 50);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     useEffect(() => {
         // Set the default product to 'authenticated' (second option)
@@ -610,18 +625,28 @@ const PizzaDemokratieCalculator = () => {
     };
 
     return (
-        <>
-            <Card className="w-full max-w-2xl mx-auto" style={{ borderColor: colorScheme.secondary }}>
-                <CardHeader className="rounded-t-lg" style={{ backgroundColor: colorScheme.primary }}>
-                    <CardTitle className="text-3xl font-bold text-white text-center">Pizza Demokratie</CardTitle>
-                    <img src={currentCoatOfArms} alt="Wappen" className="h-16 mx-auto mt-2" />
-                </CardHeader>
-                <CardContent className="space-y-6">
-                    <div className="text-sm text-gray-600 pt-4">
-                        <p>Willkommen bei Pizza Demokratie! Unser innovativer Rechner ermöglicht es Ihnen, schnell und einfach die Kosten für Ihr Volksbegehren zu ermitteln. Folgen Sie den untenstehenden Schritten, um Ihre persönliche Offerte zu erhalten. Egal ob Initiative oder Referendum, auf kommunaler, kantonaler oder nationaler Ebene - wir unterstützen Sie bei der Umsetzung Ihres demokratischen Anliegens.</p>
+        <div className="min-h-screen bg-gray-100">
+           <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+                <div className="container mx-auto px-4 flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                        <img src="/images/pizza.png" alt="Pizza Logo" className="h-8 w-8" />
+                        <h1 className={`text-2xl font-bold ${isScrolled ? 'text-gray-800' : 'text-white'}`}>Pizza Demokratie</h1>
                     </div>
-                    <form onSubmit={handleSubmit}>
-                        <div className="space-y-4">
+                    <img src={currentCoatOfArms} alt="Wappen" className={`h-10 transition-all duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} />
+                </div>
+            </header>
+
+            <div className="pt-24 pb-12 bg-gradient-to-b from-gray-900 to-gray-700 text-white">
+                <div className="container mx-auto px-4">
+                    <h2 className="text-4xl font-bold mb-4">Berechnen Sie die Kosten für Ihr Volksbegehren</h2>
+                    <p className="text-xl">Unser innovativer Rechner ermöglicht es Ihnen, schnell und einfach die Kosten für Ihr demokratisches Anliegen zu ermitteln.</p>
+                </div>
+            </div>
+
+            <main className="container mx-auto px-4 py-8">
+                <Card className="w-full max-w-2xl mx-auto shadow-lg" style={{ borderColor: colorScheme.secondary }}>
+                    <CardContent className="space-y-6 p-6">
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
                                 <Label>Schritt {getStepNumber('level')}: Wo möchtest du dein Volksbegehren lancieren?</Label>
                                 <Select
@@ -706,28 +731,29 @@ const PizzaDemokratieCalculator = () => {
                             </div>
 
                             <div>
-                                <Label className="mb-2 block">Schritt {getStepNumber('product')}: Wähle dein Produkt:</Label>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                                <Label className="text-lg font-semibold mb-4 block">Schritt {getStepNumber('product')}: Wähle dein Produkt</Label>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {productOptions.map((option, index) => (
                                         <Card
                                             key={option.id}
-                                            style={{ borderColor: colorScheme.secondary }}
-                                            className={`cursor-pointer transition-all duration-300 ${product === option.id
-                                                ? `ring-2 ${getColorClass(colorScheme.primary, 'ring')} ${getColorClass(colorScheme.secondary, 'bg')} bg-opacity-20 transform scale-105`
-                                                : `hover:${getColorClass(colorScheme.secondary, 'bg')} hover:bg-opacity-10`
-                                                }`}
+                                            className={`cursor-pointer transition-all duration-300 hover:shadow-xl ${
+                                                product === option.id
+                                                    ? `ring-2 ring-offset-2 ${getColorClass(colorScheme.primary, 'ring')} ${getColorClass(colorScheme.secondary, 'bg')} bg-opacity-20 transform scale-105`
+                                                    : 'hover:bg-gray-50'
+                                            }`}
                                             onClick={() => setProduct(option.id)}
                                         >
                                             <CardHeader>
-                                                <CardTitle className={`${index === 1 ? getColorClass(colorScheme.primary, 'text') : ''}`}>
+                                                <CardTitle className={`text-lg ${index === 1 ? getColorClass(colorScheme.primary, 'text') : ''}`}>
                                                     {option.name}
                                                 </CardTitle>
                                             </CardHeader>
                                             <CardContent>
-                                                <p className="text-sm">{option.description}</p>
-                                                <p className={`text-sm font-bold mt-2 ${getColorClass(colorScheme.primary, 'text')}`}>
-                                                    CHF {option.pricePerSignature.toFixed(2)} / Unterschrift
+                                                <p className="text-sm mb-2">{option.description}</p>
+                                                <p className={`text-xl font-bold ${getColorClass(colorScheme.primary, 'text')}`}>
+                                                    CHF {option.pricePerSignature.toFixed(2)}
                                                 </p>
+                                                <p className="text-xs text-gray-500">pro Unterschrift</p>
                                             </CardContent>
                                         </Card>
                                     ))}
@@ -781,7 +807,7 @@ const PizzaDemokratieCalculator = () => {
 
                             <Button
                                 type="submit"
-                                className="w-full"
+                                className="w-full py-3 text-lg font-semibold transition-all duration-300 hover:shadow-lg"
                                 style={{
                                     backgroundColor: colorScheme.primary,
                                     color: 'white',
@@ -790,15 +816,16 @@ const PizzaDemokratieCalculator = () => {
                             >
                                 Offerte anfordern
                             </Button>
+                        </form>
+                    </CardContent>
+                </Card>
+            </main>
 
-                        </div>
-                    </form>
-                    <Footer></Footer>
-                </CardContent>
-            </Card>
-        </>
+            <Footer />
+        </div>
     );
 };
+
 
 
 export default PizzaDemokratieCalculator;
