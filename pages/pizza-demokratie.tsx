@@ -826,6 +826,4 @@ const PizzaDemokratieCalculator = () => {
     );
 };
 
-
-
 export default PizzaDemokratieCalculator;
