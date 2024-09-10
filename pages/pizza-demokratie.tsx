@@ -15,7 +15,7 @@ type CantonKeys =
     'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' |
     'TI' | 'VD' | 'VS' | 'NE' | 'GE' | 'JU';
 
-const cantonData: Record<CantonKeys, {
+type CantonData = {
     name: string;
     population: number;
     eligibleVoters: number;
@@ -23,346 +23,352 @@ const cantonData: Record<CantonKeys, {
     referendum: number;
     active: boolean;
     cities: { name: string; population: number; eligibleVoters: number; initiative: number; referendum: number; active: boolean }[];
-}> = {
-    'ZH': {
-        name: 'Zürich',
-        population: 1539275,
-        eligibleVoters: 1026700,
-        initiative: 6000,
-        referendum: 3000,
-        active: true,
-        cities: [
-            { name: 'Zürich', population: 415367, eligibleVoters: 277000, initiative: 3000, referendum: 2000, active: true },
-            { name: 'Winterthur', population: 111851, eligibleVoters: 74600, initiative: 1000, referendum: 800, active: false },
-            { name: 'Uster', population: 35000, eligibleVoters: 23300, initiative: 800, referendum: 600, active: false }
-        ]
-    },
-    'SH': {
-        name: 'Schaffhausen',
-        population: 82348,
-        eligibleVoters: 52330,
-        initiative: 1000,
-        referendum: 800,
-        active: true,
-        cities: [
-            { name: 'Schaffhausen', population: 36000, eligibleVoters: 22900, initiative: 800, referendum: 600, active: true },
-            { name: 'Neuhausen am Rheinfall', population: 10000, eligibleVoters: 6350, initiative: 400, referendum: 300, active: false },
-            { name: 'Stein am Rhein', population: 3400, eligibleVoters: 2160, initiative: 200, referendum: 150, active: false }
-        ]
-    },
-    'VD': {
-        name: 'Waadt',
-        population: 805098,
-        eligibleVoters: 537000,
-        initiative: 12000,
-        referendum: 12000,
-        active: false,
-        cities: [
-            { name: 'Lausanne', population: 139111, eligibleVoters: 92700, initiative: 2000, referendum: 2000, active: false },
-            { name: 'Yverdon-les-Bains', population: 30143, eligibleVoters: 20100, initiative: 1000, referendum: 1000, active: false },
-            { name: 'Montreux', population: 26574, eligibleVoters: 17700, initiative: 800, referendum: 800, active: false }
-        ]
-    },
-    'BE': {
-        name: 'Bern',
-        population: 1034977,
-        eligibleVoters: 690200,
-        initiative: 15000,
-        referendum: 10000,
-        active: true,
-        cities: [
-            { name: 'Bern', population: 133883, eligibleVoters: 89200, initiative: 2000, referendum: 1500, active: true },
-            { name: 'Biel', population: 55000, eligibleVoters: 36700, initiative: 1000, referendum: 800, active: false },
-            { name: 'Thun', population: 43500, eligibleVoters: 29000, initiative: 800, referendum: 600, active: false }
-        ]
-    },
-    'LU': {
-        name: 'Luzern',
-        population: 413120,
-        eligibleVoters: 275600,
-        initiative: 4000,
-        referendum: 3000,
-        active: false,
-        cities: [
-            { name: 'Luzern', population: 81500, eligibleVoters: 54300, initiative: 1500, referendum: 1000, active: false },
-            { name: 'Emmen', population: 30000, eligibleVoters: 20000, initiative: 800, referendum: 600, active: false },
-            { name: 'Kriens', population: 27000, eligibleVoters: 18000, initiative: 700, referendum: 500, active: false }
-        ]
-    },
-    'UR': {
-        name: 'Uri',
-        population: 36703,
-        eligibleVoters: 24500,
-        initiative: 600,
-        referendum: 450,
-        active: false,
-        cities: [
-            { name: 'Altdorf', population: 9400, eligibleVoters: 6300, initiative: 300, referendum: 200, active: false },
-            { name: 'Bürglen', population: 4000, eligibleVoters: 2700, initiative: 200, referendum: 150, active: false },
-            { name: 'Schattdorf', population: 5300, eligibleVoters: 3500, initiative: 250, referendum: 180, active: false }
-        ]
-    },
-    'SZ': {
-        name: 'Schwyz',
-        population: 160480,
-        eligibleVoters: 107000,
-        initiative: 2000,
-        referendum: 1000,
-        active: false,
-        cities: [
-            { name: 'Schwyz', population: 14900, eligibleVoters: 9900, initiative: 500, referendum: 250, active: false },
-            { name: 'Freienbach', population: 16000, eligibleVoters: 10700, initiative: 550, referendum: 275, active: false },
-            { name: 'Einsiedeln', population: 15000, eligibleVoters: 10000, initiative: 525, referendum: 260, active: false }
-        ]
-    },
-    'OW': {
-        name: 'Obwalden',
-        population: 37930,
-        eligibleVoters: 25300,
-        initiative: 500,
-        referendum: 100,
-        active: false,
-        cities: [
-            { name: 'Sarnen', population: 10000, eligibleVoters: 6700, initiative: 200, referendum: 50, active: false },
-            { name: 'Kerns', population: 6200, eligibleVoters: 4100, initiative: 150, referendum: 30, active: false },
-            { name: 'Alpnach', population: 5900, eligibleVoters: 3900, initiative: 140, referendum: 28, active: false }
-        ]
-    },
-    'NW': {
-        name: 'Nidwalden',
-        population: 43087,
-        eligibleVoters: 28700,
-        initiative: 500,
-        referendum: 250,
-        active: false,
-        cities: [
-            { name: 'Stans', population: 8000, eligibleVoters: 5300, initiative: 150, referendum: 75, active: false },
-            { name: 'Hergiswil', population: 5700, eligibleVoters: 3800, initiative: 120, referendum: 60, active: false },
-            { name: 'Buochs', population: 5500, eligibleVoters: 3700, initiative: 115, referendum: 58, active: false }
-        ]
-    },
-    'GL': {
-        name: 'Glarus',
-        population: 40590,
-        eligibleVoters: 27100,
-        initiative: 1,
-        referendum: 1,
-        active: false,
-        cities: [
-            { name: 'Glarus', population: 12500, eligibleVoters: 8300, initiative: 1, referendum: 1, active: false },
-            { name: 'Glarus Nord', population: 18000, eligibleVoters: 12000, initiative: 1, referendum: 1, active: false },
-            { name: 'Glarus Süd', population: 9700, eligibleVoters: 6500, initiative: 1, referendum: 1, active: false }
-        ]
-    },
-    'ZG': {
-        name: 'Zug',
-        population: 127642,
-        eligibleVoters: 85100,
-        initiative: 2000,
-        referendum: 1500,
-        active: false,
-        cities: [
-            { name: 'Zug', population: 30500, eligibleVoters: 20300, initiative: 700, referendum: 525, active: false },
-            { name: 'Baar', population: 24000, eligibleVoters: 16000, initiative: 600, referendum: 450, active: false },
-            { name: 'Cham', population: 16000, eligibleVoters: 10700, initiative: 450, referendum: 340, active: false }
-        ]
-    },
-    'FR': {
-        name: 'Freiburg',
-        population: 321783,
-        eligibleVoters: 214500,
-        initiative: 6000,
-        referendum: 6000,
-        active: false,
-        cities: [
-            { name: 'Freiburg', population: 38000, eligibleVoters: 25300, initiative: 1200, referendum: 1200, active: false },
-            { name: 'Bulle', population: 23000, eligibleVoters: 15300, initiative: 800, referendum: 800, active: false },
-            { name: 'Villars-sur-Glâne', population: 12000, eligibleVoters: 8000, initiative: 500, referendum: 500, active: false }
-        ]
-    },
-    'SO': {
-        name: 'Solothurn',
-        population: 275247,
-        eligibleVoters: 183500,
-        initiative: 3000,
-        referendum: 1500,
-        active: false,
-        cities: [
-            { name: 'Solothurn', population: 16700, eligibleVoters: 11100, initiative: 600, referendum: 300, active: false },
-            { name: 'Olten', population: 18000, eligibleVoters: 12000, initiative: 650, referendum: 325, active: false },
-            { name: 'Grenchen', population: 16500, eligibleVoters: 11000, initiative: 600, referendum: 300, active: false }
-        ]
-    },
-    'BS': {
-        name: 'Basel-Stadt',
-        population: 195844,
-        eligibleVoters: 130600,
-        initiative: 3000,
-        referendum: 2000,
-        active: true,
-        cities: [
-            { name: 'Basel', population: 170000, eligibleVoters: 113300, initiative: 2500, referendum: 1800, active: true },
-            { name: 'Riehen', population: 20000, eligibleVoters: 13300, initiative: 600, referendum: 400, active: false },
-            { name: 'Bettingen', population: 1200, eligibleVoters: 800, initiative: 100, referendum: 80, active: false }
-        ]
-    },
-    'BL': {
-        name: 'Basel-Landschaft',
-        population: 289468,
-        eligibleVoters: 193000,
-        initiative: 1500,
-        referendum: 1500,
-        active: false,
-        cities: [
-            { name: 'Liestal', population: 14200, eligibleVoters: 9500, initiative: 300, referendum: 300, active: false },
-            { name: 'Allschwil', population: 20500, eligibleVoters: 13700, initiative: 400, referendum: 400, active: false },
-            { name: 'Reinach', population: 18700, eligibleVoters: 12500, initiative: 375, referendum: 375, active: false }
-        ]
-    },
-    'AR': {
-        name: 'Appenzell Ausserrhoden',
-        population: 55234,
-        eligibleVoters: 36800,
-        initiative: 300,
-        referendum: 300,
-        active: false,
-        cities: [
-            { name: 'Herisau', population: 15000, eligibleVoters: 10000, initiative: 150, referendum: 150, active: false },
-            { name: 'Teufen', population: 6000, eligibleVoters: 4000, initiative: 75, referendum: 75, active: false },
-            { name: 'Speicher', population: 4200, eligibleVoters: 2800, initiative: 60, referendum: 60, active: false }
-        ]
-    },
-    'AI': {
-        name: 'Appenzell Innerrhoden',
-        population: 16145,
-        eligibleVoters: 10800,
-        initiative: 1,
-        referendum: 200,
-        active: false,
-        cities: [
-            { name: 'Appenzell', population: 5800, eligibleVoters: 3900, initiative: 1, referendum: 100, active: false },
-            { name: 'Oberegg', population: 1900, eligibleVoters: 1300, initiative: 1, referendum: 50, active: false },
-            { name: 'Rüte', population: 3500, eligibleVoters: 2300, initiative: 1, referendum: 75, active: false }
-        ]
-    },
-    'SG': {
-        name: 'St. Gallen',
-        population: 510734,
-        eligibleVoters: 340500,
-        initiative: 6000,
-        referendum: 4000,
-        active: false,
-        cities: [
-            { name: 'St. Gallen', population: 75000, eligibleVoters: 50000, initiative: 1500, referendum: 1000, active: false },
-            { name: 'Rapperswil-Jona', population: 26000, eligibleVoters: 17300, initiative: 800, referendum: 550, active: false },
-            { name: 'Wil', population: 23000, eligibleVoters: 15300, initiative: 750, referendum: 500, active: false }
-        ]
-    },
-    'GR': {
-        name: 'Graubünden',
-        population: 199021,
-        eligibleVoters: 132700,
-        initiative: 3000,
-        referendum: 1500,
-        active: false,
-        cities: [
-            { name: 'Chur', population: 35000, eligibleVoters: 23300, initiative: 900, referendum: 450, active: false },
-            { name: 'Davos', population: 11000, eligibleVoters: 7300, initiative: 400, referendum: 200, active: false },
-            { name: 'Landquart', population: 8800, eligibleVoters: 5900, initiative: 350, referendum: 175, active: false }
-        ]
-    },
-    'AG': {
-        name: 'Aargau',
-        population: 685845,
-        eligibleVoters: 457200,
-        initiative: 3000,
-        referendum: 3000,
-        active: false,
-        cities: [
-            { name: 'Aarau', population: 21000, eligibleVoters: 14000, initiative: 500, referendum: 500, active: false },
-            { name: 'Baden', population: 19000, eligibleVoters: 12700, initiative: 450, referendum: 450, active: false },
-            { name: 'Wettingen', population: 20000, eligibleVoters: 13300, initiative: 475, referendum: 475, active: false }
-        ]
-    },
-    'TG': {
-        name: 'Thurgau',
-        population: 279547,
-        eligibleVoters: 186400,
-        initiative: 4000,
-        referendum: 2000,
-        active: false,
-        cities: [
-            { name: 'Frauenfeld', population: 25000, eligibleVoters: 16700, initiative: 800, referendum: 400, active: false },
-            { name: 'Kreuzlingen', population: 21000, eligibleVoters: 14000, initiative: 700, referendum: 350, active: false },
-            { name: 'Arbon', population: 14000, eligibleVoters: 9300, initiative: 500, referendum: 250, active: false }
-        ]
-    },
-    'TI': {
-        name: 'Tessin',
-        population: 350986,
-        eligibleVoters: 234000,
-        initiative: 7000,
-        referendum: 7000,
-        active: false,
-        cities: [
-            { name: 'Lugano', population: 62000, eligibleVoters: 41300, initiative: 2000, referendum: 2000, active: false },
-            { name: 'Bellinzona', population: 42000, eligibleVoters: 28000, initiative: 1500, referendum: 1500, active: false },
-            { name: 'Locarno', population: 15000, eligibleVoters: 10000, initiative: 700, referendum: 700, active: false }
-        ]
-    },
-    'VS': {
-        name: 'Wallis',
-        population: 345525,
-        eligibleVoters: 230350,
-        initiative: 5000,
-        referendum: 3000,
-        active: false,
-        cities: [
-            { name: 'Sion', population: 34710, eligibleVoters: 23140, initiative: 800, referendum: 500, active: false },
-            { name: 'Martigny', population: 18325, eligibleVoters: 12220, initiative: 600, referendum: 400, active: false },
-            { name: 'Brig-Glis', population: 13180, eligibleVoters: 8790, initiative: 500, referendum: 300, active: false }
-        ]
-    },
-    'NE': {
-        name: 'Neuenburg',
-        population: 176496,
-        eligibleVoters: 117660,
-        initiative: 4500,
-        referendum: 3000,
-        active: false,
-        cities: [
-            { name: 'Neuenburg', population: 33355, eligibleVoters: 22240, initiative: 1000, referendum: 700, active: false },
-            { name: 'La Chaux-de-Fonds', population: 37452, eligibleVoters: 24970, initiative: 1200, referendum: 800, active: false },
-            { name: 'Le Locle', population: 10320, eligibleVoters: 6880, initiative: 500, referendum: 300, active: false }
-        ]
-    },
-    'GE': {
-        name: 'Genf',
-        population: 499480,
-        eligibleVoters: 332990,
-        initiative: 8000,
-        referendum: 5000,
-        active: false,
-        cities: [
-            { name: 'Genf', population: 201818, eligibleVoters: 134550, initiative: 3000, referendum: 2000, active: false },
-            { name: 'Vernier', population: 35132, eligibleVoters: 23420, initiative: 1000, referendum: 700, active: false },
-            { name: 'Lancy', population: 33000, eligibleVoters: 22000, initiative: 900, referendum: 600, active: false }
-        ]
-    },
-    'JU': {
-        name: 'Jura',
-        population: 73584,
-        eligibleVoters: 49060,
-        initiative: 2000,
-        referendum: 1000,
-        active: false,
-        cities: [
-            { name: 'Delsberg', population: 12500, eligibleVoters: 8330, initiative: 500, referendum: 300, active: false },
-            { name: 'Pruntrut', population: 6700, eligibleVoters: 4470, initiative: 300, referendum: 200, active: false },
-            { name: 'Bassecourt', population: 3500, eligibleVoters: 2330, initiative: 200, referendum: 100, active: false }
-        ]
-    }
 };
+
+const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
+    Object.entries({
+        'ZH': {
+            name: 'Zürich',
+            population: 1539275,
+            eligibleVoters: 1026700,
+            initiative: 6000,
+            referendum: 3000,
+            active: true,
+            cities: [
+                { name: 'Zürich', population: 415367, eligibleVoters: 277000, initiative: 3000, referendum: 2000, active: true },
+                { name: 'Winterthur', population: 111851, eligibleVoters: 74600, initiative: 1000, referendum: 800, active: false },
+                { name: 'Uster', population: 35000, eligibleVoters: 23300, initiative: 800, referendum: 600, active: false }
+            ]
+        },
+        'SH': {
+            name: 'Schaffhausen',
+            population: 82348,
+            eligibleVoters: 52330,
+            initiative: 1000,
+            referendum: 800,
+            active: true,
+            cities: [
+                { name: 'Schaffhausen', population: 36000, eligibleVoters: 22900, initiative: 800, referendum: 600, active: true },
+                { name: 'Neuhausen am Rheinfall', population: 10000, eligibleVoters: 6350, initiative: 400, referendum: 300, active: false },
+                { name: 'Stein am Rhein', population: 3400, eligibleVoters: 2160, initiative: 200, referendum: 150, active: false }
+            ]
+        },
+        'VD': {
+            name: 'Waadt',
+            population: 805098,
+            eligibleVoters: 537000,
+            initiative: 12000,
+            referendum: 12000,
+            active: false,
+            cities: [
+                { name: 'Lausanne', population: 139111, eligibleVoters: 92700, initiative: 2000, referendum: 2000, active: false },
+                { name: 'Yverdon-les-Bains', population: 30143, eligibleVoters: 20100, initiative: 1000, referendum: 1000, active: false },
+                { name: 'Montreux', population: 26574, eligibleVoters: 17700, initiative: 800, referendum: 800, active: false }
+            ]
+        },
+        'BE': {
+            name: 'Bern',
+            population: 1034977,
+            eligibleVoters: 690200,
+            initiative: 15000,
+            referendum: 10000,
+            active: true,
+            cities: [
+                { name: 'Bern', population: 133883, eligibleVoters: 89200, initiative: 2000, referendum: 1500, active: true },
+                { name: 'Biel', population: 55000, eligibleVoters: 36700, initiative: 1000, referendum: 800, active: false },
+                { name: 'Thun', population: 43500, eligibleVoters: 29000, initiative: 800, referendum: 600, active: false }
+            ]
+        },
+        'LU': {
+            name: 'Luzern',
+            population: 413120,
+            eligibleVoters: 275600,
+            initiative: 4000,
+            referendum: 3000,
+            active: false,
+            cities: [
+                { name: 'Luzern', population: 81500, eligibleVoters: 54300, initiative: 1500, referendum: 1000, active: false },
+                { name: 'Emmen', population: 30000, eligibleVoters: 20000, initiative: 800, referendum: 600, active: false },
+                { name: 'Kriens', population: 27000, eligibleVoters: 18000, initiative: 700, referendum: 500, active: false }
+            ]
+        },
+        'UR': {
+            name: 'Uri',
+            population: 36703,
+            eligibleVoters: 24500,
+            initiative: 600,
+            referendum: 450,
+            active: false,
+            cities: [
+                { name: 'Altdorf', population: 9400, eligibleVoters: 6300, initiative: 300, referendum: 200, active: false },
+                { name: 'Bürglen', population: 4000, eligibleVoters: 2700, initiative: 200, referendum: 150, active: false },
+                { name: 'Schattdorf', population: 5300, eligibleVoters: 3500, initiative: 250, referendum: 180, active: false }
+            ]
+        },
+        'SZ': {
+            name: 'Schwyz',
+            population: 160480,
+            eligibleVoters: 107000,
+            initiative: 2000,
+            referendum: 1000,
+            active: false,
+            cities: [
+                { name: 'Schwyz', population: 14900, eligibleVoters: 9900, initiative: 500, referendum: 250, active: false },
+                { name: 'Freienbach', population: 16000, eligibleVoters: 10700, initiative: 550, referendum: 275, active: false },
+                { name: 'Einsiedeln', population: 15000, eligibleVoters: 10000, initiative: 525, referendum: 260, active: false }
+            ]
+        },
+        'OW': {
+            name: 'Obwalden',
+            population: 37930,
+            eligibleVoters: 25300,
+            initiative: 500,
+            referendum: 100,
+            active: false,
+            cities: [
+                { name: 'Sarnen', population: 10000, eligibleVoters: 6700, initiative: 200, referendum: 50, active: false },
+                { name: 'Kerns', population: 6200, eligibleVoters: 4100, initiative: 150, referendum: 30, active: false },
+                { name: 'Alpnach', population: 5900, eligibleVoters: 3900, initiative: 140, referendum: 28, active: false }
+            ]
+        },
+        'NW': {
+            name: 'Nidwalden',
+            population: 43087,
+            eligibleVoters: 28700,
+            initiative: 500,
+            referendum: 250,
+            active: false,
+            cities: [
+                { name: 'Stans', population: 8000, eligibleVoters: 5300, initiative: 150, referendum: 75, active: false },
+                { name: 'Hergiswil', population: 5700, eligibleVoters: 3800, initiative: 120, referendum: 60, active: false },
+                { name: 'Buochs', population: 5500, eligibleVoters: 3700, initiative: 115, referendum: 58, active: false }
+            ]
+        },
+        'GL': {
+            name: 'Glarus',
+            population: 40590,
+            eligibleVoters: 27100,
+            initiative: 1,
+            referendum: 1,
+            active: false,
+            cities: [
+                { name: 'Glarus', population: 12500, eligibleVoters: 8300, initiative: 1, referendum: 1, active: false },
+                { name: 'Glarus Nord', population: 18000, eligibleVoters: 12000, initiative: 1, referendum: 1, active: false },
+                { name: 'Glarus Süd', population: 9700, eligibleVoters: 6500, initiative: 1, referendum: 1, active: false }
+            ]
+        },
+        'ZG': {
+            name: 'Zug',
+            population: 127642,
+            eligibleVoters: 85100,
+            initiative: 2000,
+            referendum: 1500,
+            active: false,
+            cities: [
+                { name: 'Zug', population: 30500, eligibleVoters: 20300, initiative: 700, referendum: 525, active: false },
+                { name: 'Baar', population: 24000, eligibleVoters: 16000, initiative: 600, referendum: 450, active: false },
+                { name: 'Cham', population: 16000, eligibleVoters: 10700, initiative: 450, referendum: 340, active: false }
+            ]
+        },
+        'FR': {
+            name: 'Freiburg',
+            population: 321783,
+            eligibleVoters: 214500,
+            initiative: 6000,
+            referendum: 6000,
+            active: false,
+            cities: [
+                { name: 'Freiburg', population: 38000, eligibleVoters: 25300, initiative: 1200, referendum: 1200, active: false },
+                { name: 'Bulle', population: 23000, eligibleVoters: 15300, initiative: 800, referendum: 800, active: false },
+                { name: 'Villars-sur-Glâne', population: 12000, eligibleVoters: 8000, initiative: 500, referendum: 500, active: false }
+            ]
+        },
+        'SO': {
+            name: 'Solothurn',
+            population: 275247,
+            eligibleVoters: 183500,
+            initiative: 3000,
+            referendum: 1500,
+            active: false,
+            cities: [
+                { name: 'Solothurn', population: 16700, eligibleVoters: 11100, initiative: 600, referendum: 300, active: false },
+                { name: 'Olten', population: 18000, eligibleVoters: 12000, initiative: 650, referendum: 325, active: false },
+                { name: 'Grenchen', population: 16500, eligibleVoters: 11000, initiative: 600, referendum: 300, active: false }
+            ]
+        },
+        'BS': {
+            name: 'Basel-Stadt',
+            population: 195844,
+            eligibleVoters: 130600,
+            initiative: 3000,
+            referendum: 2000,
+            active: true,
+            cities: [
+                { name: 'Basel', population: 170000, eligibleVoters: 113300, initiative: 2500, referendum: 1800, active: true },
+                { name: 'Riehen', population: 20000, eligibleVoters: 13300, initiative: 600, referendum: 400, active: false },
+                { name: 'Bettingen', population: 1200, eligibleVoters: 800, initiative: 100, referendum: 80, active: false }
+            ]
+        },
+        'BL': {
+            name: 'Basel-Landschaft',
+            population: 289468,
+            eligibleVoters: 193000,
+            initiative: 1500,
+            referendum: 1500,
+            active: false,
+            cities: [
+                { name: 'Liestal', population: 14200, eligibleVoters: 9500, initiative: 300, referendum: 300, active: false },
+                { name: 'Allschwil', population: 20500, eligibleVoters: 13700, initiative: 400, referendum: 400, active: false },
+                { name: 'Reinach', population: 18700, eligibleVoters: 12500, initiative: 375, referendum: 375, active: false }
+            ]
+        },
+        'AR': {
+            name: 'Appenzell Ausserrhoden',
+            population: 55234,
+            eligibleVoters: 36800,
+            initiative: 300,
+            referendum: 300,
+            active: false,
+            cities: [
+                { name: 'Herisau', population: 15000, eligibleVoters: 10000, initiative: 150, referendum: 150, active: false },
+                { name: 'Teufen', population: 6000, eligibleVoters: 4000, initiative: 75, referendum: 75, active: false },
+                { name: 'Speicher', population: 4200, eligibleVoters: 2800, initiative: 60, referendum: 60, active: false }
+            ]
+        },
+        'AI': {
+            name: 'Appenzell Innerrhoden',
+            population: 16145,
+            eligibleVoters: 10800,
+            initiative: 1,
+            referendum: 200,
+            active: false,
+            cities: [
+                { name: 'Appenzell', population: 5800, eligibleVoters: 3900, initiative: 1, referendum: 100, active: false },
+                { name: 'Oberegg', population: 1900, eligibleVoters: 1300, initiative: 1, referendum: 50, active: false },
+                { name: 'Rüte', population: 3500, eligibleVoters: 2300, initiative: 1, referendum: 75, active: false }
+            ]
+        },
+        'SG': {
+            name: 'St. Gallen',
+            population: 510734,
+            eligibleVoters: 340500,
+            initiative: 6000,
+            referendum: 4000,
+            active: false,
+            cities: [
+                { name: 'St. Gallen', population: 75000, eligibleVoters: 50000, initiative: 1500, referendum: 1000, active: false },
+                { name: 'Rapperswil-Jona', population: 26000, eligibleVoters: 17300, initiative: 800, referendum: 550, active: false },
+                { name: 'Wil', population: 23000, eligibleVoters: 15300, initiative: 750, referendum: 500, active: false }
+            ]
+        },
+        'GR': {
+            name: 'Graubünden',
+            population: 199021,
+            eligibleVoters: 132700,
+            initiative: 3000,
+            referendum: 1500,
+            active: false,
+            cities: [
+                { name: 'Chur', population: 35000, eligibleVoters: 23300, initiative: 900, referendum: 450, active: false },
+                { name: 'Davos', population: 11000, eligibleVoters: 7300, initiative: 400, referendum: 200, active: false },
+                { name: 'Landquart', population: 8800, eligibleVoters: 5900, initiative: 350, referendum: 175, active: false }
+            ]
+        },
+        'AG': {
+            name: 'Aargau',
+            population: 685845,
+            eligibleVoters: 457200,
+            initiative: 3000,
+            referendum: 3000,
+            active: false,
+            cities: [
+                { name: 'Aarau', population: 21000, eligibleVoters: 14000, initiative: 500, referendum: 500, active: false },
+                { name: 'Baden', population: 19000, eligibleVoters: 12700, initiative: 450, referendum: 450, active: false },
+                { name: 'Wettingen', population: 20000, eligibleVoters: 13300, initiative: 475, referendum: 475, active: false }
+            ]
+        },
+        'TG': {
+            name: 'Thurgau',
+            population: 279547,
+            eligibleVoters: 186400,
+            initiative: 4000,
+            referendum: 2000,
+            active: false,
+            cities: [
+                { name: 'Frauenfeld', population: 25000, eligibleVoters: 16700, initiative: 800, referendum: 400, active: false },
+                { name: 'Kreuzlingen', population: 21000, eligibleVoters: 14000, initiative: 700, referendum: 350, active: false },
+                { name: 'Arbon', population: 14000, eligibleVoters: 9300, initiative: 500, referendum: 250, active: false }
+            ]
+        },
+        'TI': {
+            name: 'Tessin',
+            population: 350986,
+            eligibleVoters: 234000,
+            initiative: 7000,
+            referendum: 7000,
+            active: false,
+            cities: [
+                { name: 'Lugano', population: 62000, eligibleVoters: 41300, initiative: 2000, referendum: 2000, active: false },
+                { name: 'Bellinzona', population: 42000, eligibleVoters: 28000, initiative: 1500, referendum: 1500, active: false },
+                { name: 'Locarno', population: 15000, eligibleVoters: 10000, initiative: 700, referendum: 700, active: false }
+            ]
+        },
+        'VS': {
+            name: 'Wallis',
+            population: 345525,
+            eligibleVoters: 230350,
+            initiative: 5000,
+            referendum: 3000,
+            active: false,
+            cities: [
+                { name: 'Sion', population: 34710, eligibleVoters: 23140, initiative: 800, referendum: 500, active: false },
+                { name: 'Martigny', population: 18325, eligibleVoters: 12220, initiative: 600, referendum: 400, active: false },
+                { name: 'Brig-Glis', population: 13180, eligibleVoters: 8790, initiative: 500, referendum: 300, active: false }
+            ]
+        },
+        'NE': {
+            name: 'Neuenburg',
+            population: 176496,
+            eligibleVoters: 117660,
+            initiative: 4500,
+            referendum: 3000,
+            active: false,
+            cities: [
+                { name: 'Neuenburg', population: 33355, eligibleVoters: 22240, initiative: 1000, referendum: 700, active: false },
+                { name: 'La Chaux-de-Fonds', population: 37452, eligibleVoters: 24970, initiative: 1200, referendum: 800, active: false },
+                { name: 'Le Locle', population: 10320, eligibleVoters: 6880, initiative: 500, referendum: 300, active: false }
+            ]
+        },
+        'GE': {
+            name: 'Genf',
+            population: 499480,
+            eligibleVoters: 332990,
+            initiative: 8000,
+            referendum: 5000,
+            active: false,
+            cities: [
+                { name: 'Genf', population: 201818, eligibleVoters: 134550, initiative: 3000, referendum: 2000, active: false },
+                { name: 'Vernier', population: 35132, eligibleVoters: 23420, initiative: 1000, referendum: 700, active: false },
+                { name: 'Lancy', population: 33000, eligibleVoters: 22000, initiative: 900, referendum: 600, active: false }
+            ]
+        },
+        'JU': {
+            name: 'Jura',
+            population: 73584,
+            eligibleVoters: 49060,
+            initiative: 2000,
+            referendum: 1000,
+            active: false,
+            cities: [
+                { name: 'Delsberg', population: 12500, eligibleVoters: 8330, initiative: 500, referendum: 300, active: false },
+                { name: 'Pruntrut', population: 6700, eligibleVoters: 4470, initiative: 300, referendum: 200, active: false },
+                { name: 'Bassecourt', population: 3500, eligibleVoters: 2330, initiative: 200, referendum: 100, active: false }
+            ]
+        }
+    }).sort(([, a], [, b]) =>
+        b.active === a.active ? a.name.localeCompare(b.name) : (b.active ? 1 : -1) - (a.active ? 1 : -1)
+    )
+);
 
 // Farbschemata definieren
 const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { primary: string; secondary: string }> = {
@@ -539,9 +545,9 @@ const PizzaDemokratieCalculator = () => {
         if (level === 'national') {
             setIsServiceAvailable(true);
         } else if (canton) {
-            const cantonIsActive = cantonData[canton].active;
+            const cantonIsActive = cantonData && cantonData[canton as CantonKeys]?.active;
 
-            const cityIsActive = level === 'kommunal' ? cantonData[canton].cities.find(c => c.name === city)?.active : true;
+            const cityIsActive = level === 'kommunal' ? (cantonData[canton as CantonKeys]?.cities.find(c => c.name === city)?.active ?? true) : true;
             setIsServiceAvailable(!!(cantonIsActive && cityIsActive));
         }
     }, [level, canton, city]);
@@ -570,11 +576,11 @@ const PizzaDemokratieCalculator = () => {
                 population = Object.values(cantonData).reduce((sum, canton) => sum + canton.population, 0);
             } else if (level === 'kantonal' && canton) {
                 // baseSignatures = cantonData[canton][initiativeType];
-                baseSignatures = cantonData[canton][initiativeType as 'initiative' | 'referendum'];
-                eligibleVoters = cantonData[canton].eligibleVoters;
-                population = cantonData[canton].population;
+                baseSignatures = cantonData?.[canton as CantonKeys]?.[initiativeType as 'initiative' | 'referendum'] ?? 0;
+                eligibleVoters = cantonData[canton]?.eligibleVoters || 0;
+                population = cantonData[canton]?.population ?? 0;
             } else if (level === 'kommunal' && canton && city) {
-                const selectedCity = cantonData[canton].cities.find(c => c.name === city);
+                const selectedCity = cantonData && cantonData[canton]?.cities.find(c => c.name === city);
                 if (selectedCity) {
                     baseSignatures = selectedCity[initiativeType as 'initiative' | 'referendum'];
                     eligibleVoters = selectedCity.eligibleVoters;
@@ -764,7 +770,7 @@ const PizzaDemokratieCalculator = () => {
                                             <SelectValue placeholder="Wähle deine Stadt" />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            {cantonData[canton].cities.map((city) => (
+                                            {cantonData && (cantonData[canton as CantonKeys] as CantonData)?.cities.map((city) => (
                                                 <SelectItem
                                                     key={city.name}
                                                     value={city.name}
@@ -843,19 +849,77 @@ const PizzaDemokratieCalculator = () => {
                             </div>
 
                             <div className="mt-6 p-4 bg-gray-100 rounded-md">
-                                <h3 className="text-lg font-semibold mb-2">Zusammenfassung:</h3>
-                                <p>Benötigte Unterschriften: {signatures > 0 ? signatures.toLocaleString() : '-'}</p>
-                                <p>Preis pro Unterschrift: CHF {pricePerSignature.toFixed(2)}</p>
-                                <p>Basispreis: {basePrice > 0 ? basePrice.toLocaleString() + ' CHF' : '-'}</p>
-                                <p>Zuschlag für Stimmberechtigte: {voterSurcharge > 0 ? voterSurcharge.toLocaleString() + ' CHF' : '-'}</p>
+                                <h3 className="text-lg font-semibold mb-4">Zusammenfassung:</h3>
+
+                                {/* Gruppe 1 */}
+                                <div className="mb-4 pb-4 border-b">
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <p>Ebene:</p>
+                                        <p className="text-right">
+                                            {!level ? '-' :
+                                                level === 'national' ? 'National' :
+                                                    level === 'kantonal' ?
+                                                        (canton ? `Kantonal (${cantonData[canton]?.name || 'Nicht ausgewählt'})` : 'Kantonal (Kanton nicht ausgewählt)') :
+                                                        level === 'kommunal' ?
+                                                            (canton && city ?
+                                                                `Kommunal (${city},  im Kanton ${cantonData[canton]?.name || 'Nicht ausgewählt'})` :
+                                                                canton ?
+                                                                    `Kommunal (Stadt nicht ausgewählt, im Kanton ${cantonData[canton]?.name})` :
+                                                                    'Kommunal (Kanton und Stadt nicht ausgewählt)'
+                                                            ) :
+                                                            'Unbekannte Ebene'
+                                            }
+                                        </p>
+                                        <p>Typ:</p>
+                                        <p className="text-right">{initiativeType === 'initiative' ? 'Initiative' : 'Referendum'}</p>
+
+                                        <p>Benötigte Unterschriften:</p>
+                                        <p className="text-right">{signatures.toLocaleString()}</p>
+                                    </div>
+                                </div>
+
+                                {/* Gruppe 2 */}
+                                <div className="mb-4 pb-4 border-b">
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <p>Preis pro Unterschrift:</p>
+                                        <p className="text-right">CHF {pricePerSignature.toFixed(2)}</p>
+
+                                        <p>Basispreis:</p>
+                                        <p className="text-right">CHF {basePrice.toLocaleString()}</p>
+                                    </div>
+                                </div>
+
+                                {/* Gruppe 3 */}
+                                <div className="mb-4 pb-4 border-b">
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <p>Zuschlag für das Verhältnis von Stimmberechtigten zu Eiwohnern:</p>
+                                        <p className="text-right">CHF {voterSurcharge.toLocaleString()}</p>
+                                    </div>
+                                </div>
+
+                                {/* Gruppe 4 */}
                                 {expressDelivery && (
-                                    <>
-                                        <p>Expresslieferung: Ja</p>
-                                        <p>Zuschlag für Expresslieferung: {expressSurcharge > 0 ? expressSurcharge.toLocaleString() + ' CHF' : '-'}</p>
-                                    </>
+                                    <div className="mb-4 pb-4 border-b">
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <p>Expresslieferung:</p>
+                                            <p className="text-right">Ja</p>
+
+                                            <p>Zuschlag für Expresslieferung:</p>
+                                            <p className="text-right">CHF {expressSurcharge.toLocaleString()}</p>
+                                        </div>
+                                    </div>
                                 )}
-                                <p className="text-xl font-bold mt-2">Gesamtpreis: {totalPrice > 0 ? totalPrice.toLocaleString() + ' CHF' : '-'}</p>
+
+                                {/* Gesamtpreis */}
+                                <div className="mt-4">
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <p className="text-xl font-bold">Gesamtpreis:</p>
+                                        <p className="text-xl font-bold text-right">CHF {totalPrice.toLocaleString()}</p>
+                                    </div>
+                                </div>
                             </div>
+
+
                             <div>
                                 <Label htmlFor="email">E-Mail für Offerte</Label>
                                 <Input
