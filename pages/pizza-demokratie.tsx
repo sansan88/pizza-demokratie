@@ -710,8 +710,10 @@ const PizzaDemokratieCalculator = () => {
 
             <div className="pt-24 pb-12 bg-gradient-to-b from-gray-900 to-gray-700 text-white">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-4xl font-bold mb-4">Berechnen Sie die Kosten für Ihr Volksbegehren</h2>
-                    <p className="text-xl">Unser innovativer Rechner ermöglicht es Ihnen, schnell und einfach die Kosten für Ihr demokratisches Anliegen zu ermitteln.</p>
+                    <h2 className="text-4xl font-bold mb-4">Demokratie-Kostenrechner für Volksbegehren</h2>
+                    <p className="text-xl">Mit unserem benutzerfreundlichen Demokratie-Rechner können Sie schnell und transparent die Kosten für Ihre Unterschriftensammlung für Initiativen oder Referenden berechnen. Ob auf nationaler Ebene, in einem bestimmten Kanton oder einer Stadt – wählen Sie flexibel das passende Paket für Ihr Vorhaben. </p>
+                    <p className="text-xl">Entscheiden Sie sich zwischen reinen Unterschriften, beglaubigten Unterschriften oder unserem Full-Service-Paket mit Echtheitsgarantie. Wenn es einmal schneller gehen muss, steht Ihnen unser Express-Service zur Verfügung. </p>
+                    <p className="text-xl">Planen Sie Ihr Volksbegehren noch heute und lassen Sie uns die Details übernehmen – Ihr Pizza Demokratie Team freut sich auf Ihre Anfrage!</p>
                 </div>
             </div>
 
