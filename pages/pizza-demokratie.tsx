@@ -374,33 +374,35 @@ const cantonData: Partial<Record<CantonKeys, CantonData>> = Object.fromEntries(
 const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { primary: string; secondary: string }> = {
     default: { primary: '#111827', secondary: '#374151' },
     national: { primary: '#D50000', secondary: '#FF1744' },
-    kantonal: { primary: '#1E88E5', secondary: '#42A5F5' },
-    'ZH': { primary: '#0F62FE', secondary: '#78A9FF' },
-    'BE': { primary: '#FF0000', secondary: '#FFED00' },
-    'LU': { primary: '#0000FF', secondary: '#FFFFFF' },
-    'UR': { primary: '#FFCC00', secondary: '#000000' },
-    'SZ': { primary: '#FF0000', secondary: '#FFFFFF' },
-    'OW': { primary: '#FF0000', secondary: '#FFFFFF' },
-    'NW': { primary: '#FF0000', secondary: '#FFFFFF' },
-    'GL': { primary: '#FF0000', secondary: '#000000' },
-    'ZG': { primary: '#FFFFFF', secondary: '#76B2DD' },
-    'FR': { primary: '#000000', secondary: '#FFFFFF' },
-    'SO': { primary: '#FF0000', secondary: '#FFFFFF' },
-    'BS': { primary: '#000000', secondary: '#FFFFFF' },
-    'BL': { primary: '#FF0000', secondary: '#FFFFFF' },
-    'SH': { primary: '#000000', secondary: '#FFFF00' },
-    'AR': { primary: '#000000', secondary: '#FFFFFF' },
-    'AI': { primary: '#000000', secondary: '#FFFFFF' },
-    'SG': { primary: '#00FF00', secondary: '#FFFFFF' },
-    'GR': { primary: '#4B4B4B', secondary: '#A8A8A8' },
-    'AG': { primary: '#0000FF', secondary: '#000000' },
-    'TG': { primary: '#00FF00', secondary: '#FFFFFF' },
-    'TI': { primary: '#FF0000', secondary: '#0000FF' },
-    'VD': { primary: '#00FF00', secondary: '#FFFFFF' },
-    'VS': { primary: '#FF0000', secondary: '#FFFFFF' },
-    'NE': { primary: '#00FF00', secondary: '#FFFFFF' },
-    'GE': { primary: '#FF0000', secondary: '#FFFF00' },
-    'JU': { primary: '#FF0000', secondary: '#FFFFFF' }
+    kantonal: { primary: '#111827', secondary: '#374151' },
+    'BS': { primary: '#000000', secondary: '#000000' },
+    'BE': { primary: '#e7423f', secondary: '#e7423f' },
+    'SH': { primary: '#ffd72e', secondary: '#ffd72e' },
+    'ZH': { primary: '#248bcc', secondary: '#248bcc' },
+
+    'VD': { primary: '#16a74e', secondary: '#16a74e' },
+
+    'LU': { primary: '#111827', secondary: '#374151' },
+    'UR': { primary: '#111827', secondary: '#374151' },
+    'SZ': { primary: '#111827', secondary: '#374151' },
+    'OW': { primary: '#111827', secondary: '#374151' },
+    'NW': { primary: '#111827', secondary: '#374151' },
+    'GL': { primary: '#111827', secondary: '#374151' },
+    'ZG': { primary: '#111827', secondary: '#374151' },
+    'FR': { primary: '#111827', secondary: '#374151' },
+    'SO': { primary: '#111827', secondary: '#374151' },
+    'BL': { primary: '#111827', secondary: '#374151' },
+    'AR': { primary: '#111827', secondary: '#374151' },
+    'AI': { primary: '#111827', secondary: '#374151' },
+    'SG': { primary: '#111827', secondary: '#374151' },
+    'GR': { primary: '#111827', secondary: '#374151' },
+    'AG': { primary: '#111827', secondary: '#374151' },
+    'TG': { primary: '#111827', secondary: '#374151' },
+    'TI': { primary: '#111827', secondary: '#374151' },
+    'VS': { primary: '#111827', secondary: '#374151' },
+    'NE': { primary: '#111827', secondary: '#374151' },
+    'GE': { primary: '#111827', secondary: '#374151' },
+    'JU': { primary: '#111827', secondary: '#374151' }
 };
 
 // Wappen-Pfade definieren (ersetzen Sie dies durch die tatsächlichen Pfade zu Ihren Bildern)
@@ -412,6 +414,7 @@ const coatOfArms = {
         'BE': '/images/be.svg',
         'SH': '/images/sh.svg',
         'VD': '/images/vd.svg',
+        'BS': '/images/bs.svg',
         'VS': '/images/pizza.png',
         'GE': '/images/pizza.png',
         'NE': '/images/pizza.png',
@@ -425,7 +428,6 @@ const coatOfArms = {
         'ZG': '/images/pizza.png',
         'FR': '/images/pizza.png',
         'SO': '/images/pizza.png',
-        'BS': '/images/pizza.png',
         'BL': '/images/pizza.png',
         'AR': '/images/pizza.png',
         'AI': '/images/pizza.png',
@@ -487,14 +489,14 @@ const PizzaDemokratieCalculator = () => {
         if (level === 'kommunal') return currentStep === 'level' ? 1 : currentStep === 'canton' ? 2 : currentStep === 'city' ? 3 : currentStep === 'initiativeType' ? 4 : 5;
         return 1; // Fallback
     };
-    const isValidEmail = (email: string): boolean => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+    const validateEmail = (email: string): boolean => {
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(String(email).toLowerCase());
     };
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
         setEmail(newEmail);
-        setIsEmailValid(isValidEmail(newEmail));
+        setIsEmailValid(validateEmail(newEmail));
     };
     const [isEmailValid, setIsEmailValid] = useState(false);
 
@@ -668,6 +670,8 @@ const PizzaDemokratieCalculator = () => {
         // Here you would typically send this data to your backend
     };*/
     const handleNotifyMe = async () => {
+        if (!isEmailValid) return;
+
         const location = level === 'national' ? 'Switzerland' : level === 'kommunal' ? `${city}, ${canton}` : canton;
         const message = `Bitte benachrichtigen Sie mich, wenn der Service verfügbar ist in: ${location}`;
 
@@ -679,7 +683,6 @@ const PizzaDemokratieCalculator = () => {
                 },
                 body: JSON.stringify({ email, message, newsletter: false }),
             });
-            console.log(response.status)
 
             if (response.ok) {
                 alert('Wir werden Sie benachrichtigen, sobald der Service verfügbar ist!');
@@ -786,13 +789,25 @@ const PizzaDemokratieCalculator = () => {
 
                             {!isServiceAvailable && (level === 'national' || canton) && (
                                 <Alert variant="destructive">
-                                    <AlertDescription>
-                                        In diesem {level === 'kommunal' ? 'Ort' : level === 'kantonal' ? 'Kanton' : 'Land'} ist der Service leider noch nicht verfügbar.
-                                    </AlertDescription>
-                                    <Button onClick={handleNotifyMe} className="mt-2">
-                                        Bitte informieren Sie mich, wenn der Service verfügbar ist
-                                    </Button>
+                                <AlertDescription>
+                                    In diesem {level === 'kommunal' ? 'Ort' : level === 'kantonal' ? 'Kanton' : 'Land'} ist der Service leider noch nicht verfügbar.
+                                </AlertDescription>
+                                <Input
+                                    type="email"
+                                    placeholder="Ihre E-Mail-Adresse"
+                                    value={email}
+                                    onChange={handleEmailChange}
+                                    className="mt-2"
+                                />
+                                <Button
+                                    onClick={handleNotifyMe}
+                                    className="mt-2"
+                                    disabled={!isEmailValid}
+                                >
+                                    Bitte informieren Sie mich, wenn der Service verfügbar ist
+                                </Button>
                                 </Alert>
+
                             )}
 
                             <div>
@@ -942,17 +957,31 @@ const PizzaDemokratieCalculator = () => {
                                 <Label htmlFor="newsletter">Für Newsletter anmelden</Label>
                             </div>
 
-                            <Button
-                                type="submit"
-                                className="w-full py-3 text-lg font-semibold transition-all duration-300 hover:shadow-lg"
-                                style={{
-                                    backgroundColor: colorScheme.primary,
-                                    color: 'white',
-                                }}
-                                disabled={!isServiceAvailable || !level || (level !== 'national' && !canton) || (level === 'kommunal' && !city) || !product || !isEmailValid}
-                            >
-                                Offerte anfordern
-                            </Button>
+                            {isServiceAvailable ? (
+                                <Button
+                                    type="submit"
+                                    className="w-full py-3 text-lg font-semibold transition-all duration-300 hover:shadow-lg"
+                                    style={{
+                                        backgroundColor: colorScheme.primary,
+                                        color: 'white',
+                                    }}
+                                    disabled={!level || (level !== 'national' && !canton) || (level === 'kommunal' && !city) || !product || !isEmailValid}
+                                >
+                                    Offerte anfordern
+                                </Button>
+                            ) : (
+                                <Button
+                                    type="submit"
+                                    className="w-full py-3 text-lg font-semibold transition-all duration-300 hover:shadow-lg"
+                                    style={{
+                                        backgroundColor: colorScheme.primary,
+                                        color: 'white',
+                                    }}
+                                    disabled={true}
+                                >
+                                    Offerte anfordern
+                                </Button>
+                            )}
                         </form>
                     </CardContent>
                 </Card>

@@ -2,18 +2,6 @@
 // const nextConfig = {};
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites() {
-    return [
-      {
-        source: '/impressum',
-        destination: '/impressum',
-      },
-      {
-        source: '/datenschutz',
-        destination: '/datenschutz',
-      },
-    ];
-  },
   async headers() {
     return [
       {
