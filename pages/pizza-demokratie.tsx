@@ -11,8 +11,11 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import Footer from '@/components/ui/footer';
 
 
-type CantonKeys = 'ZH' | 'BE' | 'LU' | 'UR' | 'SZ' | 'OW' | 'NW' | 'GL' | 'ZG' | 'FR' | 'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' | 'TI' | 'VD';
-
+type CantonKeys = 
+  'ZH' | 'BE' | 'LU' | 'UR' | 'SZ' | 'OW' | 'NW' | 'GL' | 'ZG' | 'FR' | 
+  'SO' | 'BS' | 'BL' | 'SH' | 'AR' | 'AI' | 'SG' | 'GR' | 'AG' | 'TG' | 
+  'TI' | 'VD' | 'VS' | 'NE' | 'GE' | 'JU';
+  
 const cantonData: Record<CantonKeys, {
     name: string;
     population: number;
@@ -308,6 +311,58 @@ const cantonData: Record<CantonKeys, {
             { name: 'Locarno', population: 15000, eligibleVoters: 10000, initiative: 700, referendum: 700, active: false }
         ]
     },
+    'VS': {
+        name: 'Wallis',
+        population: 345525,
+        eligibleVoters: 230350,
+        initiative: 5000,
+        referendum: 3000,
+        active: false,
+        cities: [
+            { name: 'Sion', population: 34710, eligibleVoters: 23140, initiative: 800, referendum: 500, active: false },
+            { name: 'Martigny', population: 18325, eligibleVoters: 12220, initiative: 600, referendum: 400, active: false },
+            { name: 'Brig-Glis', population: 13180, eligibleVoters: 8790, initiative: 500, referendum: 300, active: false }
+        ]
+    },
+    'NE': {
+        name: 'Neuenburg',
+        population: 176496,
+        eligibleVoters: 117660,
+        initiative: 4500,
+        referendum: 3000,
+        active: false,
+        cities: [
+            { name: 'Neuenburg', population: 33355, eligibleVoters: 22240, initiative: 1000, referendum: 700, active: false },
+            { name: 'La Chaux-de-Fonds', population: 37452, eligibleVoters: 24970, initiative: 1200, referendum: 800, active: false },
+            { name: 'Le Locle', population: 10320, eligibleVoters: 6880, initiative: 500, referendum: 300, active: false }
+        ]
+    },
+    'GE': {
+        name: 'Genf',
+        population: 499480,
+        eligibleVoters: 332990,
+        initiative: 8000,
+        referendum: 5000,
+        active: false,
+        cities: [
+            { name: 'Genf', population: 201818, eligibleVoters: 134550, initiative: 3000, referendum: 2000, active: false },
+            { name: 'Vernier', population: 35132, eligibleVoters: 23420, initiative: 1000, referendum: 700, active: false },
+            { name: 'Lancy', population: 33000, eligibleVoters: 22000, initiative: 900, referendum: 600, active: false }
+        ]
+    },
+    'JU': {
+        name: 'Jura',
+        population: 73584,
+        eligibleVoters: 49060,
+        initiative: 2000,
+        referendum: 1000,
+        active: false,
+        cities: [
+            { name: 'Delsberg', population: 12500, eligibleVoters: 8330, initiative: 500, referendum: 300, active: false },
+            { name: 'Pruntrut', population: 6700, eligibleVoters: 4470, initiative: 300, referendum: 200, active: false },
+            { name: 'Bassecourt', population: 3500, eligibleVoters: 2330, initiative: 200, referendum: 100, active: false }
+        ]
+    }
 };
 
 // Farbschemata definieren
@@ -316,27 +371,31 @@ const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { p
     national: { primary: '#D50000', secondary: '#FF1744' },
     kantonal: { primary: '#1E88E5', secondary: '#42A5F5' },
     'ZH': { primary: '#0F62FE', secondary: '#78A9FF' },
-    'BE': { primary: '#E31937', secondary: '#F38D94' },
-    'LU': { primary: '#1192E8', secondary: '#82CFFF' },
-    'UR': { primary: '#FA4D56', secondary: '#FFB3B8' },
-    'SZ': { primary: '#FF0000', secondary: '#FF8080' },
-    'OW': { primary: '#198038', secondary: '#6FDC8C' },
-    'NW': { primary: '#D12771', secondary: '#FF9AC2' },
-    'GL': { primary: '#D2A106', secondary: '#FDDC69' },
-    'ZG': { primary: '#0043CE', secondary: '#8CB6FF' },
-    'FR': { primary: '#000000', secondary: '#8D8D8D' },
-    'SO': { primary: '#E60000', secondary: '#FF8080' },
-    'BS': { primary: '#000000', secondary: '#8D8D8D' },
-    'BL': { primary: '#E60000', secondary: '#FF8080' },
-    'SH': { primary: '#ECE31A', secondary: '#FFF475' },
-    'AR': { primary: '#000000', secondary: '#8D8D8D' },
-    'AI': { primary: '#000000', secondary: '#8D8D8D' },
-    'SG': { primary: '#0F9D58', secondary: '#7BCEA0' },
+    'BE': { primary: '#FF0000', secondary: '#FFED00' },
+    'LU': { primary: '#0000FF', secondary: '#FFFFFF' },
+    'UR': { primary: '#FFCC00', secondary: '#000000' },
+    'SZ': { primary: '#FF0000', secondary: '#FFFFFF' },
+    'OW': { primary: '#FF0000', secondary: '#FFFFFF' },
+    'NW': { primary: '#FF0000', secondary: '#FFFFFF' },
+    'GL': { primary: '#FF0000', secondary: '#000000' },
+    'ZG': { primary: '#FFFFFF', secondary: '#76B2DD' },
+    'FR': { primary: '#000000', secondary: '#FFFFFF' },
+    'SO': { primary: '#FF0000', secondary: '#FFFFFF' },
+    'BS': { primary: '#000000', secondary: '#FFFFFF' },
+    'BL': { primary: '#FF0000', secondary: '#FFFFFF' },
+    'SH': { primary: '#000000', secondary: '#FFFF00' },
+    'AR': { primary: '#000000', secondary: '#FFFFFF' },
+    'AI': { primary: '#000000', secondary: '#FFFFFF' },
+    'SG': { primary: '#00FF00', secondary: '#FFFFFF' },
     'GR': { primary: '#4B4B4B', secondary: '#A8A8A8' },
-    'AG': { primary: '#0F62FE', secondary: '#78A9FF' },
-    'TG': { primary: '#0F62FE', secondary: '#78A9FF' },
-    'TI': { primary: '#E60000', secondary: '#FF8080' },
-    'VD': { primary: '#1D8B4E', secondary: '#6FDC8C' }
+    'AG': { primary: '#0000FF', secondary: '#000000' },
+    'TG': { primary: '#00FF00', secondary: '#FFFFFF' },
+    'TI': { primary: '#FF0000', secondary: '#0000FF' },
+    'VD': { primary: '#00FF00', secondary: '#FFFFFF' },
+    'VS': { primary: '#FF0000', secondary: '#FFFFFF' },
+    'NE': { primary: '#00FF00', secondary: '#FFFFFF' },
+    'GE': { primary: '#FF0000', secondary: '#FFFF00' },
+    'JU': { primary: '#FF0000', secondary: '#FFFFFF' }
 };
 
 // Wappen-Pfade definieren (ersetzen Sie dies durch die tatsächlichen Pfade zu Ihren Bildern)
@@ -344,28 +403,32 @@ const coatOfArms = {
     default: './images/pizza.png',
     national: '/images/swiss.svg',
     kantonal: {
-        'ZH': '../images/zh.svg',
+        'ZH': '/images/zh.svg',
         'BE': '/images/be.svg',
-        'LU': '/images/lu-coat.svg',
-        'UR': '/images/ur-coat.svg',
-        'SZ': '/images/sz-coat.svg',
-        'OW': '/images/ow-coat.svg',
-        'NW': '/images/nw-coat.svg',
-        'GL': '/images/gl-coat.svg',
-        'ZG': '/images/zg-coat.svg',
-        'FR': '/images/fr-coat.svg',
-        'SO': '/images/so-coat.svg',
-        'BS': '/images/bs-coat.svg',
-        'BL': '/images/bl-coat.svg',
-        'SH': 'images/sh.svg',
-        'AR': '/images/ar-coat.svg',
-        'AI': '/images/ai-coat.svg',
-        'SG': '/images/sg-coat.svg',
-        'GR': '/images/gr-coat.svg',
-        'AG': '/images/ag-coat.svg',
-        'TG': '/images/tg-coat.svg',
-        'TI': '/images/ti-coat.svg',
-        'VD': '/images/vd.svg'
+        'SH': '/images/sh.svg',
+        'VD': '/images/vd.svg',
+        'VS': '/images/pizza.png',
+        'GE': '/images/pizza.png',
+        'NE': '/images/pizza.png',
+        'JU': '/images/pizza.png',
+        'LU': '/images/pizza.png',
+        'UR': '/images/pizza.png',
+        'SZ': '/images/pizza.png',
+        'OW': '/images/pizza.png',
+        'NW': '/images/pizza.png',
+        'GL': '/images/pizza.png',
+        'ZG': '/images/pizza.png',
+        'FR': '/images/pizza.png',
+        'SO': '/images/pizza.png',
+        'BS': '/images/pizza.png',
+        'BL': '/images/pizza.png',
+        'AR': '/images/pizza.png',
+        'AI': '/images/pizza.png',
+        'SG': '/images/pizza.png',
+        'GR': '/images/pizza.png',
+        'AG': '/images/pizza.png',
+        'TG': '/images/pizza.png',
+        'TI': '/images/pizza.png',
     },
 };
 
