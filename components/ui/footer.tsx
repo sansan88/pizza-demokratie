@@ -13,6 +13,9 @@ const Footer = () => {
         </Link> |
         <Link href="/datenschutz" className="text-blue-600 hover:underline ml-2">
           Datenschutz
+        </Link> |
+        <Link href="/data.xlsx" className="text-blue-600 hover:underline ml-2">
+          Datensatz
         </Link>
       </p>
     </footer>
