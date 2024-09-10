@@ -312,7 +312,7 @@ const cantonData: Record<CantonKeys, {
 
 // Farbschemata definieren
 const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { primary: string; secondary: string }> = {
-    default: { primary: '#e4e1d8', secondary: '#000000' },
+    default: { primary: '#868685', secondary: '#e4e1d8' },
     national: { primary: '#D50000', secondary: '#FF1744' },
     kantonal: { primary: '#1E88E5', secondary: '#42A5F5' },
     'ZH': { primary: '#0F62FE', secondary: '#78A9FF' },
@@ -341,7 +341,7 @@ const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { p
 
 // Wappen-Pfade definieren (ersetzen Sie dies durch die tatsächlichen Pfade zu Ihren Bildern)
 const coatOfArms = {
-    default: './images/pizza.jpeg',
+    default: './images/pizza.jpg',
     national: '/images/swiss.svg',
     kantonal: {
         'ZH': '../images/zh.svg',
