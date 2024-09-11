@@ -19,7 +19,7 @@ const Footer = () => {
         </Link> |
         <Link href="https://opendata.swiss/de/dataset/eidg-wahlen-2023" className="text-blue-600 hover:underline ml-2">
           Eidg. Wahlen 2023
-        </Link>
+        </Link> |
         <Link href="https://napoleonsnightmare.ch/kantonale-politische-systeme/" className="text-blue-600 hover:underline ml-2">
           Daten Volksrechte
         </Link>
