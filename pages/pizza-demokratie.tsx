@@ -441,9 +441,9 @@ const coatOfArms = {
 };
 
 const productOptions = [
-    { id: 'basic', name: 'Nur Unterschriften', description: 'Basispaket für die Unterschriftensammlung', pricePerSignature: 2.5 },
-    { id: 'authenticated', name: 'Mit Beglaubigung', description: 'Inkl. Beglaubigung der gesammelten Unterschriften', pricePerSignature: 4.0 },
-    { id: 'fullService', name: 'Full Service', description: 'Komplettpaket mit Echtheitsgarantie', pricePerSignature: 7.5 },
+    { id: 'basic', name: 'Nur Unterschriften', description: 'Basispaket für die Unterschriftensammlung', pricePerSignature: 5.0 },
+    { id: 'authenticated', name: 'Mit Beglaubigung', description: 'Inkl. Beglaubigung der gesammelten Unterschriften', pricePerSignature: 7.5 },
+//    { id: 'fullService', name: 'Full Service', description: 'Komplettpaket mit Echtheitsgarantie', pricePerSignature: 7.5 },
 ];
 
 
@@ -456,7 +456,6 @@ const PizzaDemokratieCalculator = () => {
 
     const [expressDelivery, setExpressDelivery] = useState(false);
     const [basePrice, setBasePrice] = useState(0);
-    const [voterSurcharge, setVoterSurcharge] = useState(0);
     const [expressSurcharge, setExpressSurcharge] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const [signatures, setSignatures] = useState(0);
@@ -570,29 +569,24 @@ const PizzaDemokratieCalculator = () => {
     useEffect(() => {
         if (level) {
             let baseSignatures;
-            let population;
             let eligibleVoters;
 
             if (level === 'national') {
                 baseSignatures = initiativeType === 'initiative' ? 100000 : 50000;
-                eligibleVoters = 5567120; // Object.values(cantonData).reduce((sum, canton) => sum + canton.eligibleVoters, 0);
-                population = 8960800; // Object.values(cantonData).reduce((sum, canton) => sum + canton.population, 0);
+                eligibleVoters = 5567120;
             } else if (level === 'kantonal' && canton) {
-                // baseSignatures = cantonData[canton][initiativeType];
                 baseSignatures = cantonData?.[canton as CantonKeys]?.[initiativeType as 'initiative' | 'referendum'] ?? 0;
                 eligibleVoters = cantonData[canton]?.eligibleVoters || 0;
-                population = cantonData[canton]?.population ?? 0;
             } else if (level === 'kommunal' && canton && city) {
                 const selectedCity = cantonData && cantonData[canton]?.cities.find(c => c.name === city);
                 if (selectedCity) {
                     baseSignatures = selectedCity[initiativeType as 'initiative' | 'referendum'];
                     eligibleVoters = selectedCity.eligibleVoters;
-                    population = selectedCity.population;
                 } else {
-                    return; // Stadt nicht gefunden, Berechnung abbrechen
+                    return;
                 }
             } else {
-                return; // Nicht genug Informationen für Berechnung
+                return;
             }
 
             const calculatedSignatures = Math.min(baseSignatures, eligibleVoters * 0.1);
@@ -601,23 +595,16 @@ const PizzaDemokratieCalculator = () => {
             const calculatedBasePrice = calculatedSignatures * pricePerSignature;
             setBasePrice(Math.round(calculatedBasePrice));
 
-            // Calculate voter surcharge
-            const ratio = eligibleVoters / population;
-            const surchargePercentage = (1 - ratio) * 100;
-            const calculatedVoterSurcharge = calculatedBasePrice * (surchargePercentage / 100);
-            setVoterSurcharge(Math.round(calculatedVoterSurcharge));
-
             // Calculate express surcharge
             const calculatedExpressSurcharge = expressDelivery ? calculatedBasePrice * 0.5 : 0;
             setExpressSurcharge(Math.round(calculatedExpressSurcharge));
 
             // Calculate total price
-            const calculatedTotalPrice = calculatedBasePrice + calculatedVoterSurcharge + calculatedExpressSurcharge;
+            const calculatedTotalPrice = calculatedBasePrice + calculatedExpressSurcharge;
             setTotalPrice(Math.round(calculatedTotalPrice));
         } else {
             setSignatures(0);
             setBasePrice(0);
-            setVoterSurcharge(0);
             setExpressSurcharge(0);
             setTotalPrice(0);
         }
@@ -831,7 +818,7 @@ const PizzaDemokratieCalculator = () => {
 
                             <div>
                                 <Label className="text-lg font-semibold mb-4 block">Schritt {getStepNumber('product')}: Wähle dein Produkt</Label>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                                     {productOptions.map((option, index) => (
                                         <Card
                                             key={option.id}
@@ -868,11 +855,14 @@ const PizzaDemokratieCalculator = () => {
                             </div>
 
                             <div className="mt-6 p-4 bg-gray-100 rounded-md">
-                                <h3 className="text-lg font-semibold mb-4">Zusammenfassung:</h3>
-
+                                <h3 className="text-lg font-semibold mb-4">Beispielofferte:</h3>
+                                <img src={currentCoatOfArms} alt="Wappen" className={`h-10 transition-all duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} />
                                 {/* Gruppe 1 */}
                                 <div className="mb-4 pb-4 border-b">
                                     <div className="grid grid-cols-2 gap-2">
+                                    <p>Typ:</p>
+                                        <p className="text-right">{initiativeType === 'initiative' ? 'Initiative' : 'Referendum'}</p>
+
                                         <p>Ebene:</p>
                                         <p className="text-right">
                                             {!level ? '-' :
@@ -889,11 +879,27 @@ const PizzaDemokratieCalculator = () => {
                                                             'Unbekannte Ebene'
                                             }
                                         </p>
-                                        <p>Typ:</p>
-                                        <p className="text-right">{initiativeType === 'initiative' ? 'Initiative' : 'Referendum'}</p>
+
+
+
+            
+
+
 
                                         <p>Benötigte Unterschriften:</p>
                                         <p className="text-right">{signatures.toLocaleString()}</p>
+ {/* 
+
+                                        <p>Anzahl Stimmberechtigte:</p>
+                                        <p className="text-right">
+                                            {level === 'national' ? '5.567.120' :
+                                             level === 'kantonal' && canton ? cantonData[canton]?.eligibleVoters.toLocaleString() :
+                                             level === 'kommunal' && canton && city ? 
+                                                cantonData[canton]?.cities.find(c => c.name === city)?.eligibleVoters.toLocaleString() :
+                                             '-'}
+                                        </p>
+*/}
+
                                     </div>
                                 </div>
 
@@ -902,19 +908,13 @@ const PizzaDemokratieCalculator = () => {
                                     <div className="grid grid-cols-2 gap-2">
                                         <p>Preis pro Unterschrift:</p>
                                         <p className="text-right">CHF {pricePerSignature.toFixed(2)}</p>
-
+                                      {/* 
                                         <p>Basispreis:</p>
                                         <p className="text-right">CHF {basePrice.toLocaleString()}</p>
+                                           */}
                                     </div>
                                 </div>
 
-                                {/* Gruppe 3 */}
-                                <div className="mb-4 pb-4 border-b">
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <p>Zuschlag für das Verhältnis von Stimmberechtigten zu Eiwohnern:</p>
-                                        <p className="text-right">CHF {voterSurcharge.toLocaleString()}</p>
-                                    </div>
-                                </div>
 
                                 {/* Gruppe 4 */}
                                 {expressDelivery && (
@@ -940,7 +940,7 @@ const PizzaDemokratieCalculator = () => {
 
 
                             <div>
-                                <Label htmlFor="email">E-Mail für Offerte</Label>
+                                <Label htmlFor="email">Auswetung per E-Mail erhalten</Label>
                                 <Input
                                     id="email"
                                     type="email"
