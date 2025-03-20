@@ -443,7 +443,7 @@ const coatOfArms = {
 const productOptions = [
     { id: 'basic', name: 'Nur Unterschriften', description: 'Basispaket für die Unterschriftensammlung', pricePerSignature: 6.5 },
     { id: 'authenticated', name: 'Mit Beglaubigung', description: 'Inkl. Beglaubigung der gesammelten Unterschriften', pricePerSignature: 8.0 },
-//    { id: 'fullService', name: 'Full Service', description: 'Komplettpaket mit Echtheitsgarantie', pricePerSignature: 7.5 },
+    //    { id: 'fullService', name: 'Full Service', description: 'Komplettpaket mit Echtheitsgarantie', pricePerSignature: 7.5 },
 ];
 
 
@@ -695,9 +695,13 @@ const PizzaDemokratieCalculator = () => {
             <div className="pt-24 pb-12 bg-gradient-to-b from-gray-900 to-gray-700 text-white">
                 <div className="container mx-auto px-4">
                     <h2 className="text-4xl font-bold mb-4">Demokratie-Kostenrechner für Volksbegehren</h2>
-                    <p className="text-xl">Mit unserem benutzerfreundlichen Demokratie-Rechner können Sie schnell und transparent die Kosten für Ihre Unterschriftensammlung für Initiativen oder Referenden berechnen. Ob auf nationaler Ebene, in einem bestimmten Kanton oder einer Stadt – wählen Sie flexibel das passende Paket für Ihr Vorhaben. </p>
-                    <p className="text-xl">Entscheiden Sie sich zwischen reinen Unterschriften, beglaubigten Unterschriften oder unserem Full-Service-Paket mit Echtheitsgarantie. Wenn es einmal schneller gehen muss, steht Ihnen unser Express-Service zur Verfügung. </p>
-                    <p className="text-xl">Planen Sie Ihr Volksbegehren noch heute und lassen Sie uns die Details übernehmen – Ihr Democracy Watch Team freut sich auf Ihre Anfrage!</p>
+                    <p className="text-xl">Demokratie ist ein Grundpfeiler unserer Gesellschaft – doch wie viel kostet es eigentlich, eine Initiative oder ein Referendum in der Schweiz zu lancieren? Unser Demokratie-Kostenrechner schafft Transparenz und zeigt, mit welchen Mitteln politische Mitbestimmung erkauft werden kann. </p>
+                    <p className="text-xl">Unser Ziel ist es, Bewusstsein für die Mechanismen der Unterschriftensammlung zu schaffen und aufzuzeigen, wie finanzielle Ressourcen demokratische Prozesse beeinflussen können. Ob auf nationaler Ebene, in einem bestimmten Kanton oder einer Stadt – unser Rechner liefert Ihnen eine klare Einschätzung der Kosten. </p>
+                    <p className="text-xl">Wir wollen keine Dienstleistungen verkaufen, sondern für eine offene und informierte Demokratie eintreten. Nutzen Sie den Rechner, um sich ein Bild davon zu machen, wie einfach es ist, Unterschriften zu kaufen – und welche Auswirkungen das auf die direkte Demokratie hat.                    </p>
+                    <p className='text-xl'>
+                        Democracy Watch – Für mehr Transparenz in der Schweizer Demokratie.
+                    </p>
+
                 </div>
             </div>
 
@@ -857,7 +861,7 @@ const PizzaDemokratieCalculator = () => {
                                 {/* Gruppe 1 */}
                                 <div className="mb-4 pb-4 border-b">
                                     <div className="grid grid-cols-2 gap-2">
-                                    <p>Typ:</p>
+                                        <p>Typ:</p>
                                         <p className="text-right">{initiativeType === 'initiative' ? 'Initiative' : 'Referendum'}</p>
 
                                         <p>Ebene:</p>
@@ -879,13 +883,13 @@ const PizzaDemokratieCalculator = () => {
 
 
 
-            
+
 
 
 
                                         <p>Benötigte Unterschriften:</p>
                                         <p className="text-right">{signatures.toLocaleString()}</p>
- {/* 
+                                        {/* 
 
                                         <p>Anzahl Stimmberechtigte:</p>
                                         <p className="text-right">
@@ -905,7 +909,7 @@ const PizzaDemokratieCalculator = () => {
                                     <div className="grid grid-cols-2 gap-2">
                                         <p>Preis pro Unterschrift:</p>
                                         <p className="text-right">CHF {pricePerSignature.toFixed(2)}</p>
-                                      {/* 
+                                        {/* 
                                         <p>Basispreis:</p>
                                         <p className="text-right">CHF {basePrice.toLocaleString()}</p>
                                            */}
