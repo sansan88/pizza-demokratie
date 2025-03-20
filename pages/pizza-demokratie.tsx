@@ -441,8 +441,8 @@ const coatOfArms = {
 };
 
 const productOptions = [
-    { id: 'basic', name: 'Nur Unterschriften', description: 'Basispaket für die Unterschriftensammlung', pricePerSignature: 5.0 },
-    { id: 'authenticated', name: 'Mit Beglaubigung', description: 'Inkl. Beglaubigung der gesammelten Unterschriften', pricePerSignature: 7.5 },
+    { id: 'basic', name: 'Nur Unterschriften', description: 'Basispaket für die Unterschriftensammlung', pricePerSignature: 6.5 },
+    { id: 'authenticated', name: 'Mit Beglaubigung', description: 'Inkl. Beglaubigung der gesammelten Unterschriften', pricePerSignature: 8.0 },
 //    { id: 'fullService', name: 'Full Service', description: 'Komplettpaket mit Echtheitsgarantie', pricePerSignature: 7.5 },
 ];
 
@@ -455,7 +455,6 @@ const PizzaDemokratieCalculator = () => {
     const [pricePerSignature, setPricePerSignature] = useState(4.0);
 
     const [expressDelivery, setExpressDelivery] = useState(false);
-    const [basePrice, setBasePrice] = useState(0);
     const [expressSurcharge, setExpressSurcharge] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const [signatures, setSignatures] = useState(0);
@@ -593,7 +592,6 @@ const PizzaDemokratieCalculator = () => {
             setSignatures(Math.ceil(calculatedSignatures));
 
             const calculatedBasePrice = calculatedSignatures * pricePerSignature;
-            setBasePrice(Math.round(calculatedBasePrice));
 
             // Calculate express surcharge
             const calculatedExpressSurcharge = expressDelivery ? calculatedBasePrice * 0.5 : 0;
@@ -604,7 +602,6 @@ const PizzaDemokratieCalculator = () => {
             setTotalPrice(Math.round(calculatedTotalPrice));
         } else {
             setSignatures(0);
-            setBasePrice(0);
             setExpressSurcharge(0);
             setTotalPrice(0);
         }
