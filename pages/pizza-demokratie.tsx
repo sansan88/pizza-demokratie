@@ -685,8 +685,8 @@ const PizzaDemokratieCalculator = () => {
             <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
                 <div className="container mx-auto px-4 flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                        <img src="/images/pizza.png" alt="Pizza Logo" className="h-8 w-8" />
-                        <h1 className={`text-2xl font-bold ${isScrolled ? 'text-gray-800' : 'text-white'}`}>Pizza Demokratie</h1>
+                        <img src="/images/pizza.png" alt="Democracy Watch Logo" className="h-8 w-8" />
+                        <h1 className={`text-2xl font-bold ${isScrolled ? 'text-gray-800' : 'text-white'}`}>Democracy Watch</h1>
                     </div>
                     <img src={currentCoatOfArms} alt="Wappen" className={`h-10 transition-all duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} />
                 </div>
@@ -697,7 +697,7 @@ const PizzaDemokratieCalculator = () => {
                     <h2 className="text-4xl font-bold mb-4">Demokratie-Kostenrechner für Volksbegehren</h2>
                     <p className="text-xl">Mit unserem benutzerfreundlichen Demokratie-Rechner können Sie schnell und transparent die Kosten für Ihre Unterschriftensammlung für Initiativen oder Referenden berechnen. Ob auf nationaler Ebene, in einem bestimmten Kanton oder einer Stadt – wählen Sie flexibel das passende Paket für Ihr Vorhaben. </p>
                     <p className="text-xl">Entscheiden Sie sich zwischen reinen Unterschriften, beglaubigten Unterschriften oder unserem Full-Service-Paket mit Echtheitsgarantie. Wenn es einmal schneller gehen muss, steht Ihnen unser Express-Service zur Verfügung. </p>
-                    <p className="text-xl">Planen Sie Ihr Volksbegehren noch heute und lassen Sie uns die Details übernehmen – Ihr Pizza Demokratie Team freut sich auf Ihre Anfrage!</p>
+                    <p className="text-xl">Planen Sie Ihr Volksbegehren noch heute und lassen Sie uns die Details übernehmen – Ihr Democracy Watch Team freut sich auf Ihre Anfrage!</p>
                 </div>
             </div>
 

@@ -48,7 +48,7 @@ const Datenschutz = () => {
 
               <section className="mb-6">
                 <h2 className="text-xl font-semibold mt-4 mb-2">5. Formular-Daten</h2>
-                <p>Wenn Sie unseren Rechner nutzen, können Sie Ihre E-Mail Adresse eigeben um sich für einen Newsletter, Mehr Informationen oder eine Offerte zu registrieren. Die Eingabe der E-Mail Adresse ist für die Verwendugn des Rechners nicht notwendig. Wir speichern Ihre E-Mail Adresse nicht auf einem Drittsystem und Sie können sich jederzeit via info@pizza-demokratie.ch bei uns melden um Ihre Daten zu löschen.</p>
+                <p>Wenn Sie unseren Rechner nutzen, können Sie Ihre E-Mail Adresse eigeben um sich für einen Newsletter, Mehr Informationen oder eine Offerte zu registrieren. Die Eingabe der E-Mail Adresse ist für die Verwendugn des Rechners nicht notwendig. Wir speichern Ihre E-Mail Adresse nicht auf einem Drittsystem und Sie können sich jederzeit via info@democracy-watch.ch bei uns melden um Ihre Daten zu löschen.</p>
               </section>
 
               <p className="mt-4">Letzte Aktualisierung: 10.09.2024</p>

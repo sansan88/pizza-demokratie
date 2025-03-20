@@ -10,7 +10,7 @@ const Impressum = () => {
       <div className="pt-24 pb-12 bg-gradient-to-b from-gray-900 to-gray-700 text-white">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold mb-4">Impressum</h1>
-          <p className="text-xl">Rechtliche Informationen zu Pizza Demokratie</p>
+          <p className="text-xl">Rechtliche Informationen zu Democracy Watch</p>
         </div>
       </div>
 
@@ -22,7 +22,7 @@ const Impressum = () => {
                         
                         <section>
                             <h3 className="text-lg font-semibold mb-2">Verantwortlich für den Inhalt:</h3>
-                            <p>IG Pizza Demokratie</p>
+                            <p>IG Democracy Watch</p>
                             <p>c/o liitu consulting gmbh</p>
                             <p>Villenstrasse 4</p>
                             <p>CH-8200 Schaffhausen</p>
@@ -32,7 +32,7 @@ const Impressum = () => {
                         <section>
                             <h3 className="text-lg font-semibold mb-2">Kontakt:</h3>
                             <p>Telefon: +41 79 403 36 13</p>
-                            <p>E-Mail: info@pizza-demokratie.ch</p>
+                            <p>E-Mail: info@democracy-watch.ch</p>
                         </section>
 
                         <section>
