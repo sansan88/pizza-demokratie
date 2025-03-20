@@ -10,7 +10,7 @@ const Datenschutz = () => {
       <div className="pt-24 pb-12 bg-gradient-to-b from-gray-900 to-gray-700 text-white">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold mb-4">Datenschutzerklärung</h1>
-          <p className="text-xl"></p>
+          <p className="text-xl">Demokratie ist ein Grundpfeiler unserer Gesellschaft – doch wie viel kostet es eigentlich, eine Initiative oder ein Referendum in der Schweiz zu lancieren? Unser Demokratie-Kostenrechner schafft Transparenz und zeigt, mit welchen Mitteln politische Mitbestimmung erkauft werden kann. </p>
         </div>
       </div>
 
