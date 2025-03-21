@@ -447,7 +447,7 @@ const productOptions = [
 ];
 
 
-const PizzaDemokratieCalculator = () => {
+const DemocracyWatchCalculator = () => {
     const [level, setLevel] = useState('kantonal');
     const [canton, setCanton] = useState<CantonKeys | ''>('');
     const [city, setCity] = useState('');
@@ -999,4 +999,4 @@ const PizzaDemokratieCalculator = () => {
     );
 };
 
-export default PizzaDemokratieCalculator;
+export default DemocracyWatchCalculator;
