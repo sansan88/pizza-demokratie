@@ -1,20 +1,13 @@
-# 🍕 Pizza Demokratie – Demokratie-Kostenrechner für Volksbegehren
+# 🔍 Democracy Watch – Demokratie-Kostenrechner für Volksbegehren
 
-Willkommen beim **Pizza Demokratie** Projekt! Unsere Plattform bietet einen benutzerfreundlichen Demokratie-Kostenrechner, mit dem Sie schnell und transparent die Kosten für Ihre Unterschriftensammlung für Initiativen oder Referenden berechnen können. Egal ob auf nationaler Ebene, in einem bestimmten Kanton oder einer Stadt – wir haben das passende Paket für Ihr Vorhaben!
+Willkommen beim **Democracy Watch** Projekt!
+Demokratie ist ein Grundpfeiler unserer Gesellschaft – doch wie viel kostet es eigentlich, eine Initiative oder ein Referendum in der Schweiz zu lancieren? Unser Demokratie-Kostenrechner schafft Transparenz und zeigt, mit welchen Mitteln politische Mitbestimmung erkauft werden kann.
 
-### 🌍 Projektüberblick
+Unser Ziel ist es, Bewusstsein für die Mechanismen der Unterschriftensammlung zu schaffen und aufzuzeigen, wie finanzielle Ressourcen demokratische Prozesse beeinflussen können. Ob auf nationaler Ebene, in einem bestimmten Kanton oder einer Stadt – unser Rechner liefert Ihnen eine klare Einschätzung der Kosten.
 
-**Pizza Demokratie** unterstützt Bürgerinnen und Bürger bei der Umsetzung von Volksbegehren und Referenden. Mit unserem Kostenrechner können Sie ganz einfach herausfinden, welche Aufwände auf Sie zukommen, und flexibel das passende Servicepaket für Ihre Unterschriftensammlung wählen.
+Wir wollen keine Dienstleistungen verkaufen, sondern für eine offene und informierte Demokratie eintreten. Nutzen Sie den Rechner, um sich ein Bild davon zu machen, wie einfach es ist, Unterschriften zu kaufen – und welche Auswirkungen das auf die direkte Demokratie hat.                   
 
-#### Hauptfunktionen der Plattform:
-- Berechnung der Kosten für Unterschriftensammlungen auf nationaler, kantonaler oder städtischer Ebene.
-- Auswahl zwischen verschiedenen Services: reine Unterschriften, beglaubigte Unterschriften oder unser Full-Service-Paket mit Echtheitsgarantie.
-- Express-Service für dringende Vorhaben.
-- Einfache und transparente Planung von Initiativen und Referenden.
-
-### 🚀 Ziel des Projekts
-
-Unser Ziel ist es, Bürgern und Organisationen dabei zu helfen, ihre demokratischen Rechte einfacher und effizienter auszuüben. Indem wir die Planung und Organisation von Volksbegehren vereinfachen, möchten wir die politische Beteiligung fördern und demokratische Prozesse unterstützen.
+Democracy Watch – Für mehr Transparenz in der Schweizer Demokratie.
 
 ### 🛠️ Technische Details
 
@@ -55,7 +48,7 @@ Um das Projekt lokal auszuführen, folgen Sie diesen Schritten:
 
 2. **Abhängigkeiten installieren:**
    ```bash
-   cd pizza-demokratie
+   cd democracy-watch
    npm install
    ```
 
@@ -75,4 +68,4 @@ Dieses Projekt steht unter der [MIT Lizenz](LICENSE).
 
 Falls Sie Fragen haben, kontaktieren Sie uns gerne über die Issues-Seite oder schicken Sie uns eine E-Mail an support@pizza-demokratie.ch.
 
-Planen Sie Ihr Volksbegehren noch heute und lassen Sie uns die Details übernehmen – Ihr Pizza Demokratie Team freut sich auf Ihre Anfrage! 🍕✨
+Planen Sie Ihr Volksbegehren noch heute und lassen Sie uns die Details übernehmen – Ihr Democracy Watch Team freut sich auf Ihre Anfrage! 🍕✨

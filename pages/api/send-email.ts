@@ -31,10 +31,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       // Senden Sie die E-Mail
       await transporter.sendMail({
-        from: '"Pizza Demokratie" <info@pizza-demokratie.ch>',
+        from: '"Democracy Watch" <info@democracy-watch.ch>',
         to: email,
         bcc: ["info@sfdd.ch"],
-        subject: "Ihre Offerte von Pizza Demokratie",
+        subject: "Ihre Auswertung von Democracy Watch",
         text: message,
       });
 
@@ -42,10 +42,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // Hier könnten Sie die E-Mail-Adresse zu Ihrem Newsletter hinzufügen
         console.log('Subscribing to newsletter:', email);
         await transporter.sendMail({
-          from: '"Pizza Demokratie Newsletter" <info@pizza-demokratie.ch>',
+          from: '"Democracy Watch" <info@democracy-watch.ch>',
           to: email,
           bcc: ["info@sfdd.ch"],
-          subject: "Newsletter von Pizza Demokratie",
+          subject: "Newsletter von Democracy Watch",
           text: "Wir tragen Sie in unseren Newsletter ein",
         });
       }
