@@ -408,7 +408,7 @@ const colorSchemes: Record<CantonKeys | 'default' | 'national' | 'kantonal', { p
 
 // Wappen-Pfade definieren (ersetzen Sie dies durch die tatsächlichen Pfade zu Ihren Bildern)
 const coatOfArms = {
-    default: './images/pizza.png',
+    default: './images/logo.png',
     national: '/images/swiss.svg',
     kantonal: {
         'ZH': '/images/zh.svg',
@@ -686,7 +686,7 @@ const PizzaDemokratieCalculator = () => {
                 <div className="container mx-auto px-4 flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                         <a href="/" className="flex items-center space-x-2">
-                            <img src="/images/pizza.png" alt="Democracy Watch Logo" className="h-8 w-8" />
+                            <img src="/images/logo.png" alt="Democracy Watch Logo" className="h-8 w-8" />
                             <h1 className={`text-2xl font-bold ${isScrolled ? 'text-gray-800' : 'text-white'}`}>Democracy Watch</h1>
                         </a>
                     </div>
